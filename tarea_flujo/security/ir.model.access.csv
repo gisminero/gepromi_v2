@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tareaflujolinea_lect,tarea.tareaflujolinea_lect,model_tarea_flujo_flujolinea,expediente.access_group_expte_lectura,1,0,0,0
+access_tareaflujo_lect,tareaflujo.tareaflujo_lect,model_tarea_flujo_flujo,expediente.access_group_expte_lectura,1,0,0,0

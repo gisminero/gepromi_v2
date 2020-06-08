@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="doc_digital.administrar">
+      <field name="name">Plantillas Relacionadas Con la Tarea</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form"/>
+      <field name="arch" type="xml">
+        <xpath expr="/form/group/field[@name='observaciones']" position="after">
+          <group>
+            <button name="administrar_digitales" type="object" string="Administrar Digitales" context="{'id_activo': id}"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+ </odoo>

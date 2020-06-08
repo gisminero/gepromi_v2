@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <report id="pases_report2"
+                string="Reporte Personalizado"
+                model="departamento.departamento"
+                report_type="qweb-pdf"
+                name="departamento.pases_report_template2"
+        />
+        <template id="pases_report_template2" >
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+
+                        <div class="page">
+                            <h1>Reporte de Pases</h1>
+                            <p>Listado de Pases</p>
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

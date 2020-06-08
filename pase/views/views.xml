@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="pase.list">
+      <field name="name">Lista de Pases</field>
+      <field name="model">pase.pase</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+       <!--    <field name="expediente_id"/>  -->
+          <field name="depart_origen_id"/>
+          <field name="depart_destino_id"/>
+          <field name="folios"/>
+          <field name="fecha_hora_envio"/>
+          <field name="user_recep_id"/>
+          <field name="fecha_hora_recep"/>
+          <field name="observ_pase" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="pase.form">
+      <field name="name">Formulario de Pase</field>
+      <field name="model">pase.pase</field>
+      <field name="arch" type="xml">
+      <form string="Creacion de Pase">
+        <header>
+        <separator string="PASE DE EXPEDIENTE" colspan="4"/>
+        <field name="name"/>
+        </header>
+        <group>
+          <field name="expediente_id"/>
+          <field name="depart_origen_id"/>
+          <field name="depart_destino_id"/>
+          <field name="user_origen_id"/>
+          <field name="user_recep_id"/>
+          <field name="fecha_hora_envio"/>
+          <field name="fecha_hora_recep"/>
+          <field name="folios"/>
+          <field name="observ_pase" />
+         </group>
+      </form>
+      </field>
+    </record>
+
+
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="pase.action_window1">
+      <field name="name">Pases</field>
+      <field name="res_model">pase.pase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="GeProMi Pase." id="pase.menu_root" sequence="1" groups="pase.access_group_pase_ajustes" />
+
+    <!-- menu categories -->
+
+    <menuitem name="Mi Oficina" id="pase.mi" parent="pase.menu_root"/>
+
+
+
+    <!-- actions -->
+
+
+
+
+    <menuitem name="Auditoria de Pases" id="pase.menu_1_list" parent="pase.mi"
+              action="pase.action_window1" />
+<!-- groups="gepromi.group_gepromi_config" -->
+
+  </data>
+</odoo>

@@ -1,0 +1,43 @@
+<odoo>
+
+<data>
+<!--
+    <record model="ir.ui.view" id="notificaciones.notifica_form_exped">
+      <field name="name">Crear Notificacion</field>
+      <field name="model">notifica</field>
+      <field name="arch" type="xml">
+      <form string="Creando Evento">
+        <header>
+        <field name="state" widget="statusbar" statusbar_visible="draft,active,cumplido,vencido"/>
+        </header>
+            <separator string="Creando Evento Asociado a Notificacion" colspan="4"/>
+             <group>
+                  <field name="name"   nolabel="1" colspan="1"/>
+                    <button name="activar" type="object" states="draft" string="Validar"
+                    class="oe_highlight" context="{'id_activo': id}"/>
+                    <button name="recibir" type="object" states="active" string="Documentacion Recibida"
+                    class="oe_highlight" context="{'id_activo': id}" confirm="Recibo documentacion para anexar al expediente."
+                    groups="group_config_notif_write"/>
+            </group>
+        <group>
+        <field name="id" invisible="1" />
+          <field name="expediente_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <field name="plazo_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <field name="fecha_notificacion"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <field name="fecha_vencimiento" />
+           <field name="alertas_enviados"/>
+          <field name="user_creador_id"/>
+          <field name="info" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+         </group>
+          <footer>
+              <button name="desactiva_notificaciones" string="Dejar de Notificar Plazo Vencido" class="oe_highlight" type="object"
+                            attrs="{'invisible':[('state','!=', 'vencido')]}" context="{'id_activo': id}" />
+                    <button string="Cancelar" class="btn-default" special="cancel" />
+          </footer>
+      </form>
+      </field>
+    </record>
+-->
+
+  </data>
+</odoo>

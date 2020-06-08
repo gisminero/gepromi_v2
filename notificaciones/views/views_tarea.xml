@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="notificaciones.tarea_form">
+      <field name="name">Formulario de Tareas</field>
+      <field name="model">tarea.plazo</field>
+      <field name="inherit_id" ref="tarea.plazo_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='tipo']" position="after">
+            <field name="grupos_notificar" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+
+
+<data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="notificaciones.grupo_list">
+      <field name="name">Lista de Grupos de Notificacion</field>
+      <field name="model">grupo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="notificaciones.grupo_form">
+      <field name="name">Grupos de Notificacion</field>
+      <field name="model">grupo</field>
+      <field name="arch" type="xml">
+      <form string="Grupo para Notificacion de Alertas">
+        <header>
+        <separator string="Grupo de Usuarios para Notificacion" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="user_notificar_id" />
+         </group>
+      </form>
+      </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="notificaciones.grupo_action_window">
+      <field name="name">Grupos de Notificacion</field>
+      <field name="res_model">grupo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Grupos de Notificacion" id="notificaciones.grupo_menu_list" parent="gepromi.config"
+              action="notificaciones.grupo_action_window"  />
+
+</data>
+</odoo>

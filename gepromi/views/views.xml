@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+
+
+    <!-- Top menu item -->
+    <!--     -->
+    <menuitem name="GeTraMi Exp." id="gepromi.menu_root" sequence="0"/>
+    <menuitem name="GeTraMi Config." id="gepromi.menu_root_conf" sequence="1" groups="gepromi.group_gepromi_config"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Expediente" id="gepromi.inicio" parent="gepromi.menu_root"/>
+    <menuitem name="Notificaciones" id="gepromi.notifica" parent="gepromi.menu_root"/>
+<!--    <menuitem name="Configuracion" id="gepromi.config" parent="gepromi.menu_root"/> -->
+    <menuitem name="Configuracion" id="gepromi.config" parent="gepromi.menu_root_conf"/>
+
+
+
+    <!-- actions -->
+              <!--
+    <menuitem name="List" id="gepromi.menu_1_list" parent="gepromi.menu_1"
+              action="gepromi.action_window"/>
+    <menuitem name="Server to list" id="gepromi" parent="gepromi.menu_2"
+              action="gepromi.action_server"/>
+                -->
+
+  </data>
+</odoo>

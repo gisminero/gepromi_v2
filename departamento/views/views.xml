@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="departamento.list">
+      <field name="name">departamento list</field>
+      <field name="model">departamento.departamento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="state_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="departamento.form">
+      <field name="name">departamento form</field>
+      <field name="model">departamento.departamento</field>
+      <field name="arch" type="xml">
+      <form string="Sales Receipt">
+        <header>
+        <separator string="Nuevo departamento" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="description"/>
+        <field name="state_id"/>
+<field name="active"/>
+
+         </group>
+      </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="departamento.action_window">
+      <field name="name">departamento Window</field>
+      <field name="res_model">departamento.departamento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+     <menuitem name="Departamento" id="departamento.menu_1_list" parent="gepromi.config"
+              action="departamento.action_window"/>
+
+  </data>
+</odoo>

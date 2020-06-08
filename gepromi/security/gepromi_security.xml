@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="gepromi.module_management" >
+      <field name="name">GeProMi. Menu Config</field>
+      <field name="description">Tiene acceso al menu configuracion.</field>
+      <field name="sequence">4</field>
+    </record>
+
+
+   <record id="gepromi.group_gepromi_config" model="res.groups">
+     <field name="name">Si</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="gepromi.module_management"/>
+    </record>
+
+
+    <record model="ir.module.category" id="gepromi.module_notif" >
+      <field name="name">GeProMi. Menu Notificaciones</field>
+      <field name="description">Tiene acceso al menu Notificaciones.</field>
+      <field name="sequence">5</field>
+    </record>
+
+
+   <record id="group_gepromi_notif" model="res.groups">
+     <field name="name">Si</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="gepromi.module_notif"/>
+    </record>
+
+</odoo>

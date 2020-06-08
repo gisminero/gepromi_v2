@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--     -->
+    <record model="ir.ui.view" id="tarea.plazo_list_con_opcion">
+      <field name="name">Lista de Plazos</field>
+      <field name="model">tarea.plazo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id"/>
+          <field name="name"/>
+          <field name="active"/>
+          <!--
+          <button name="agendar_plazo" type="object"  string="Agendar Plazo / Ver Detalle"
+                    class="oe_highlight" context="{'id_activo_plazo': id}"/>
+                    -->
+
+          <button name="tarea_plazo_detalle" type="object"  string="Agendar Plazo / Ver Detalle"
+                    class="oe_highlight" context="{'id_activo_plazo': id}"/>
+        <!--
+          <field name="cant"/>
+          <field name="tipo"/>
+           -->
+        </tree>
+      </field>
+    </record>
+  </data>
+
+
+
+</odoo>

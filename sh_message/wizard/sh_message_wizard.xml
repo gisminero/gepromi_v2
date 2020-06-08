@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>	
+	
+	
+	<record id="sh_message_wizard" model="ir.ui.view">
+		<field name="name">sh.message.wizard</field>
+		<field name="model">sh.message.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Message">
+				<header>
+        		</header>
+				<field name="name"/>
+				<footer>
+				<!-- 	<button string="OK" class="btn-primary" special="cancel" />  -->
+					<button string="Ok" class="btn-default" name="reload_view" type="object"  />
+				</footer>
+			</form>
+		</field>	
+	</record>
+
+	<record id="sh_message_wizard_false" model="ir.ui.view">
+		<field name="name">sh.message.wizard</field>
+		<field name="model">sh.message.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Message">
+				<header>
+        		</header>
+				<field name="name"/>
+				<footer>
+				 	<button string="OK" class="btn-primary" special="cancel" />
+				<!--	<button string="Ok" class="btn-default" name="reload_view" type="object"  /> -->
+				</footer>
+			</form>
+		</field>
+	</record>
+
+</data>
+</odoo>

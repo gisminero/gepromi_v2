@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_plant_lect,plantilla.plantilla.rel,model_plantilla_rel,access_group_plant_lectura,1,0,0,0
+access_plant_escr,plantilla.plantilla.rel,model_plantilla_rel,access_group_plant_escritura,1,1,0,0
+access_plant_crea,plantilla.plantilla.rel,model_plantilla_rel,access_group_plant_creacion,1,1,1,1
+

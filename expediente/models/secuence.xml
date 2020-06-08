@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_expediente" model="ir.sequence">
+            <field name="name">sec_expediente</field>
+            <field name="code">sec_expediente</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="suffix">-X-%(year)s</field>
+        </record>
+
+    </data>
+</odoo>

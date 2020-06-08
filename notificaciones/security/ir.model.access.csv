@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_notif_alerta,notificaciones.feriados,model_feriados,group_alerta_evento_vencido,1,1,0,0
+access_notif_alerta_listo,notificaciones.alerta,model_alerta,group_alerta_evento_vencido,1,1,0,0
+access_notif_alerta2,notificaciones.alerta2,model_notifica,group_alerta_evento_vencido,1,1,0,0
+access_notif_,notificaciones.notifica,model_notifica,group_config_notif_lect,1,0,0,0
+access_notif_write,notificaciones.notifica,model_notifica,group_config_notif_write,1,1,0,0
+access_notif_crea,notificaciones.notifica,model_notifica,group_config_notif_crea,1,1,1,1
+access_notif_crea_feriado,notificaciones.feriado_crea,model_feriados,group_config_notif_crea,1,1,1,1
+access_notif_crea_grupos,notificaciones.grupo,model_grupo,group_config_notif_crea,1,1,1,1
+access_notif_crea_plazos,notificaciones.plazo,model_tarea_plazo,group_config_notif_crea,1,1,0,0
+access_notif_base_res_users,notificaciones.res_users,base.model_res_users,group_alerta_evento_vencido,1,0,0,0
+access_notif_base_hr_employee,notificaciones.hr_employee,hr.model_hr_employee,group_config_notif_lect,1,1,1,1
+access_notif_exp,notificaciones.notifica,model_notifica,expediente.access_group_expte_lectura,1,0,0,0

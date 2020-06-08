@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="tarea_flujo_exp.seguimiento_linea_list">
+      <field name="name">Seguimiento por Tareas</field>
+      <field name="model">seguimiento_linea</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="seguimiento_id"/>
+          <field name="tarea"/>
+          <field name="tarea_inicio"/>
+          <field name="observ_segui"/>
+          <field name="subproc"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tarea_flujo_exp.seguimiento_list">
+      <field name="name">Seguimiento por Tareas</field>
+      <field name="model">seguimiento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="expediente_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tarea_flujo_exp.seguimiento_form">
+      <field name="name">Seguimiento por Tareas</field>
+      <field name="model">seguimiento</field>
+      <field name="arch" type="xml">
+      <form string="Seguimiento por tareas">
+        <header>
+        </header>
+            <group>
+              <field name="name"/>
+              <field name="expediente_id" on_change="asignar_nombre(expediente_id)"/>
+              <field name="seguimiento_lineas" widget="one2many_list" editable="bottom">
+                <tree>
+                  <field name="tarea" />
+                  <field name="tarea_inicio" />
+                  <field name="observ_segui" />
+                  <field name="subproc" />
+                </tree>
+              </field>
+            </group>
+      </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tarea_flujo_exp.lista">
+      <field name="name">Auditoria de Tareas Realizadas</field>
+      <field name="res_model">seguimiento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Seguimiento por Tareas" id="tarea_flujo_exp.lista_menu" parent="gepromi.config"  action="tarea_flujo_exp.lista"/>
+
+  </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="1" model="tarea.tarea">
+    <field name="name">Inicio de Expediente</field>
+    <field name="descrip">A description for record </field>
+    <field name="active">True</field>
+</record>
+<record id="2" model="tarea.tarea">
+    <field name="name">Archivo de Expediente</field>
+    <field name="descrip">A description for record </field>
+    <field name="active">True</field>
+</record>
+</odoo>

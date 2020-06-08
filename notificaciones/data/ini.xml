@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <!--  -->
+        <record id="object0" model="alerta">
+        <field name="user_alerta_id">1</field>
+        <field name="alerta_recibido">True</field>
+      </record>
+    </data>
+</odoo>

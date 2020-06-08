@@ -1,0 +1,169 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--     -->
+    <record model="ir.ui.view" id="tarea.list">
+      <field name="name">tarea list</field>
+      <field name="model">tarea.tarea</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="codigo"/>
+            <field name="departament_id"/>
+          <field name="name"/>
+          <field name="descrip"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tarea.form">
+      <field name="name">Formulario de Tarea</field>
+      <field name="model">tarea.tarea</field>
+      <field name="arch" type="xml">
+      <form string="Sales Receipt">
+        <header>
+
+        <separator string="Nueva Tarea de Proceso" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="codigo"/>
+          <field name="active"/>
+          <field name="departament_id"/>
+          <field name="tipo"/>
+          <field name="subproc" attrs="{'readonly':[('tipo','!=', '6')]}"/>
+          <field name="fueraflujo"/>
+          <!-- attrs="{'readonly':[('tipo','!=', '4')]}"/>-->
+          <field name="estado_legal"/>
+         </group>
+
+
+
+          <group colspan="4">
+              <field name="descrip"/>
+              <field name="plazos"/>
+          </group>
+      </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <!--     -->
+    <record model="ir.actions.act_window" id="tarea.action_window">
+      <field name="name">tarea window</field>
+      <field name="res_model">tarea.tarea</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- actions -->
+    <menuitem name="Tareas" id="tarea.menu_1_list" parent="gepromi.config"  action="tarea.action_window"/>
+  </data>
+
+
+  <data>
+    <!-- explicit list view definition -->
+    <!--     -->
+    <record model="ir.ui.view" id="tarea.plazo_list">
+      <field name="name">Lista de Plazos</field>
+      <field name="model">tarea.plazo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="active"/>
+        <!--
+          <field name="cant"/>
+          <field name="tipo"/>
+           -->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tarea.plazo_form">
+      <field name="name">Plazo form</field>
+      <field name="model">tarea.plazo</field>
+      <field name="arch" type="xml">
+      <form string="Nueva Pantalla de Plazos">
+        <header>
+
+        <separator string="Plazo" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="descrip"/>
+          <field name="active"/>
+          <field name="cant"/>
+          <field name="tipo"/>
+         </group>
+      </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+    <!--     -->
+    <record model="ir.actions.act_window" id="plazoaction_window">
+      <field name="name">Plazos</field>
+      <field name="res_model">tarea.plazo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- actions -->
+    <menuitem name="Plazos" id="tarea.menu_22_list" parent="gepromi.config"  action="plazoaction_window"/>
+  </data>
+
+<!--
+  <data>
+
+
+    <record model="ir.ui.view" id="tarea.flujolist_form">
+      <field name="name">tarea.flujolist.form</field>
+      <field name="model">tarea.flujo</field>
+      <field name="arch" type="xml">
+        <form string="Flujo de Tareas">
+            <group>
+                <field name="name" domain="[('active', '=', True)]" />
+
+            </group>
+
+        <field name="lineflujo_ids" nolabel="1" colspan="1">
+            <tree string="Flujo de Tareas" editable="bottom">
+                <field name="secuencia" />
+                <field name="tarea_padre" domain="[('active', '=', True)]"/>
+                <field name="tarea" domain="[('active', '=', True)]" on_change="tareaInicial(tarea)"/>
+                <field name="descrip"/>
+            </tree>
+        </field>
+
+        </form>
+      </field>
+    </record>
+
+
+        <record id="tarea.flujolist_tree" model="ir.ui.view">
+            <field name="name">tarea.flujolinea.tree</field>
+            <field name="model">tarea.flujolinea</field>
+            <field name="arch" type="xml">
+                <tree string="Lineas">
+                    <field name="tarea_padre"/>
+                    <field name="tarea" />
+                     <field name="descrip"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+    <record model="ir.actions.act_window" id="flujoaction_window">
+      <field name="name">Config de Flujos de Tareas</field>
+      <field name="res_model">tarea.flujo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Flujos" id="tarea.menu_flujo" parent="gepromi.config"
+    action="flujoaction_window" groups="gepromi.group_gepromi_config" />
+  </data>
+-->
+
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="plantilla.module_management" >
+      <field name="name">GeProMi.Plantilla</field>
+      <field name="description">Niveles de acceso a plantillas.</field>
+      <field name="sequence">6</field>
+    </record>
+
+   <record id="access_group_plant_lectura" model="res.groups">
+     <field name="name">Solo Lectura</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="plantilla.module_management"/>
+    </record>
+
+    <record id="access_group_plant_escritura" model="res.groups">
+      <field name="name">Lectura/Escritura</field>
+      <field name="implied_ids" eval="[(4, ref('plantilla.access_group_plant_lectura'))]"/>
+        <field name="category_id" ref="plantilla.module_management"/>
+    </record>
+
+    <record id="access_group_plant_creacion" model="res.groups">
+      <field name="name">Crear/Eliminar</field>
+      <field name="implied_ids" eval="[(4, ref('plantilla.access_group_plant_escritura'))]"/>
+      <field name="category_id" ref="plantilla.module_management"/>
+    </record>
+</odoo>

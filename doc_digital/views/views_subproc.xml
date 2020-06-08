@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="tarea_flujo_exp.seguimiento_subproc_list">
+      <field name="name">Seguimiento de Subprocesos</field>
+      <field name="model">seguimiento_subproc</field>
+      <field name="arch" type="xml">
+        <tree>
+              <field name="seguimiento_id"/>
+              <field name="subproc_id" />
+              <field name="momento_inicio" />
+          <field name="subproc_cerrado" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tarea_flujo_exp.seguimiento_subproc_form">
+      <field name="name">Seguimiento de Subprocesos</field>
+      <field name="model">seguimiento_subproc</field>
+      <field name="arch" type="xml">
+      <form string="Seguimiento por tareas">
+        <header>
+        </header>
+            <group>
+              <field name="seguimiento_id"/>
+              <field name="subproc_id" />
+              <field name="momento_inicio" />
+              <field name="subproc_cerrado" />
+              <field name="tarea_regreso" >
+              </field>
+            </group>
+      </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tarea_flujo_exp.seguimiento_subproc_action">
+      <field name="name">Auditoria de Subprocesos</field>
+      <field name="res_model">seguimiento_subproc</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Seguimiento de Subprocesos" id="seguimiento_subproc" parent="gepromi.config"
+              action="tarea_flujo_exp.seguimiento_subproc_action"/>
+
+  </data>
+</odoo>

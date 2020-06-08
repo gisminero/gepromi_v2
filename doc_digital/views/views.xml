@@ -1,0 +1,112 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="doc_digital.archivo_list">
+      <field name="name">Archivos Digitales</field>
+      <field name="model">doc_digital.archivo</field>
+      <field name="arch" type="xml">
+        <tree  delete="false" >
+          <field name="id"/>
+          <field name="name"/>
+          <field name="archivo" filename="name" />
+          <field name="state"/>
+          <field name="empleado_envia"/>
+
+          <!-- <field name="archivos_id"/>-->
+          <button name="eliminar_linea" type="object" string="Eliminar" context="{'id_activo': id}" class="oe_highlight"
+                     attrs="{'invisible':[('state', '!=', 'draft')]}" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="doc_digital.archivo_form">
+      <field name="name">Docuemtacion Digital</field>
+      <field name="model">doc_digital.archivo</field>
+      <field name="arch" type="xml">
+      <form string="Documentacion Digital" >
+          <header>
+          <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
+        </header>
+            <group>
+
+              <field name="id" invisible="1" />
+              <field name="name" attrs="{'readonly':[('state','!=', 'draft')]}" />
+              <field name="archivo" attrs="{'readonly':[('state','!=', 'draft')]}" />
+              <field name="empleado_envia" />
+            </group>
+        <!-- attrs="{'invisible':[('state', '!=', 'draft')]}" -->
+        <!--
+        <footer>
+                    <button name="eliminar_linea" type="object" string="Eliminar" context="{'id_activo': id}" class="oe_highlight"
+                      />
+                    <button name="guardar_linea" type="object" string="Guardar" class="oe_highlight" context="{'id_activo': id}"
+                    />
+                    <button string="Cancelar" class="btn-default" special="cancel" />
+        </footer>
+        -->
+      </form>
+      </field>
+    </record>
+
+
+
+
+    <record model="ir.ui.view" id="doc_digital.list">
+      <field name="name">Documentacion Digital</field>
+      <field name="model">doc_digital</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="expediente_id"/>
+          <!--<field name="archivos_id"/>-->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="doc_digital.form">
+      <field name="name">Docuemtacion Digital</field>
+      <field name="model">doc_digital</field>
+      <field name="arch" type="xml">
+      <form string="Documentacion Digital" create="false" >
+        <header>
+
+        </header>
+            <group>
+              <field name="name" attrs="{'readonly':[('name','!=', 'siempre_readonly')]}" />
+              <field name="expediente_id" attrs="{'readonly':[('name','!=', 'siempre_readonly')]}" />
+              <field name="archivos_id" />
+            </group>
+
+<a href="#" onclick="window.open('/doc_digital/static/src/hola.pdf', '_blank')" >To Access Index Html Page</a>
+
+
+    <iframe marginheight="0" marginwidth="0" frameborder = "0"
+                src="http://localhost:8069/muk_web_preview/static/lib/PDFjsNUEVA/web/viewer.html?file=hola.pdf" width="100%" height="1000"/>
+
+        <footer>
+        <group>
+            <button name="activar_archivos" type="object"  string="Activar" class="oe_highlight"
+                    confirm="Si confirma la validacion, no se podran modificar los archivos adjuntos existentes en el expediente."
+                    context="{'id_activo': id}"/>
+
+
+          <button name="crear_union_pdf" type="object"  string=" Descargar documentos " class="oe_highlight"
+                    context="{'id_activo': id}"/>
+
+                    </group>
+		</footer>
+
+      </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="doc_digital.action">
+      <field name="name">Doc Digital</field>
+      <field name="res_model">doc_digital</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Doc Digital" id="doc_digital.menu" parent="gepromi.config"  action="doc_digital.action"/>
+
+  </data>
+</odoo>

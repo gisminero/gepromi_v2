@@ -1,0 +1,84 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="notificaciones.plazos_exp_list">
+      <field name="name">Lista de Plazos del Expediente</field>
+      <field name="model">notifica</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id" invisible="1"/>
+          <field name="name"/>
+          <field name="expediente_id"/>
+          <field name="fecha_notificacion"/>
+          <field name="state"/>
+
+          <field name="fecha_vencimiento"/>
+                <button name="detalle_plazo" type="object"  string="Ver Detalle"
+                    class="oe_highlight" context="{'id_activo_plazo': id}"/>
+
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="notificaciones.plazos_exp_form">
+      <field name="name">Detalle de Plazo</field>
+      <field name="model">notifica</field>
+      <field name="arch" type="xml">
+      <form string="Detalle de Plazo">
+      <header>
+        <separator string="Plazo" colspan="4" invisible='1'/>
+        <field name="state" widget="statusbar" statusbar_visible="draft,active,vencido"/>
+        </header>
+        <group>
+
+                  <field name="name"   nolabel="1" colspan="1"/>
+                  <!--  attrs="{'readonly':[('state','!=', 'draft')]}"  -->
+                    <button name="activar" type="object" states="draft" string="Validar"
+                    class="oe_highlight" context="{'id_activo': id}"/>
+                    <button name="recibir" type="object" states="active" string="Documentacion Recibida"
+                    class="oe_highlight" context="{'id_activo': id}" confirm="Recibo documentacion para anexar al expediente." />
+            </group>
+        <group>
+        <field name="id" invisible="1" />
+          <field name="expediente_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+            <field name="nombre_pedimento"   />
+          <!--   on_change="nombrePlazo(expediente_id, plazo_id)"   -->
+          <field name="plazo_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <!--   on_change="nombrePlazo(expediente_id, plazo_id)"   -->
+          <field name="fecha_notificacion"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <!--  on_change="onchangeInicioNotifica(fecha_notificacion, plazo_id)"  -->
+          <field name="fecha_vencimiento" />
+           <field name="alertas_enviados" attrs="{'readonly':[('state','!=', 'draft')]}" invisible="1"/>
+          <field name="user_creador_id"/>
+          <field name="info" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+           <field name="notificar_plazo_vencidos"/>
+         </group>
+
+                  <footer>
+
+                    <button name="desactiva_notificaciones" string="Dejar de Notificar Plazo Vencido" class="oe_highlight" type="object"
+                            attrs="{'invisible':[('state','!=', 'vencido')]}" context="{'id_activo': id}" />
+            <button string="Cerrar" class="btn-default" special="cancel"/>
+
+          </footer>
+
+      </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="notificaciones.plazos_detalle_window">
+      <field name="name">Plazos</field>
+      <field name="res_model">notifica</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Detalle de Plazos" id="notificaciones.menu_plazos_list" parent="gepromi.config"
+              action="notificaciones.plazos_detalle_window" />
+
+  </data>
+</odoo>

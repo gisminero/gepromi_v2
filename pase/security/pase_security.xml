@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="pase.module_management" >
+      <field name="name">GeProMi.Pases.Exp.</field>
+      <field name="description">Niveles de acceso a Pases de Expedientes.</field>
+      <field name="sequence">2</field>
+    </record>
+
+
+   <record id="access_group_pase_lectura" model="res.groups">
+     <field name="name">Solo Lectura</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="pase.module_management"/>
+    </record>
+
+    <record id="access_group_pase_escritura" model="res.groups">
+      <field name="name">Lectura/Escritura</field>
+      <field name="implied_ids" eval="[(4, ref('pase.access_group_pase_lectura'))]"/>
+   <field name="category_id" ref="pase.module_management"/>
+    </record>
+
+    <record id="access_group_pase_creacion" model="res.groups">
+      <field name="name">Crear/Eliminar</field>
+      <field name="implied_ids" eval="[(4, ref('pase.access_group_pase_escritura'))]"/>
+    <field name="category_id" ref="pase.module_management"/>
+    </record>
+
+    <record id="access_group_pase_ajustes" model="res.groups">
+      <field name="name">Audotoria/Ajustes</field>
+      <field name="implied_ids" eval="[(4, ref('pase.access_group_pase_creacion'))]"/>
+    <field name="category_id" ref="pase.module_management"/>
+    </record>
+
+</odoo>

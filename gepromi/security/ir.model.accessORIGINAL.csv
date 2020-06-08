@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gepromi_gepromi,gepromi.gepromi,model_gepromi_gepromi,,1,0,0,0

@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="exped_person.expediente_form_person">
+      <field name="name">Asignar Expediente</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="tarea_flujo_exp.expediente_form5"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='proxima_tarea']"  position="after">
+            <button name="popup_asignar" type="object" string="Asignar a persona ... " context="{'id_activo': id, 'vista_padre': 'form'}" class="oe_highlight"  />
+        </xpath>
+        <xpath expr="//field[@name='tarea_actual']"  position="after">
+            <field name="empleado_seg" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+
+ </odoo>

@@ -1,0 +1,65 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="mineral.list">
+      <field name="name">Lista de Minerales</field>
+      <field name="model">mineral</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="categoria"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="mineral.form">
+      <field name="name">Formulario de minerales</field>
+      <field name="model">mineral</field>
+      <field name="arch" type="xml">
+      <form string="Administracion del Mineral">
+        <header>
+        <separator string="Mineral" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="categoria"/>
+         </group>
+      </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="mineral.action_window">
+      <field name="name">Mineral Ventana</field>
+      <field name="res_model">mineral</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="mineral.action_server">
+      <field name="name">procedimiento server</field>
+      <field name="model_id" ref="model_procedimiento_procedimiento"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+
+    <!-- actions -->
+
+     <menuitem name="Mineral" id="mineral.menu_1_list" parent="gepromi.config"
+              action="mineral.action_window" groups="gepromi.group_gepromi_config"/>
+    <!-- <menuitem name="Server to list" id="procedimiento" parent="procedimiento.menu_2"
+              action="procedimiento.action_server"/>
+    -->
+  </data>
+</odoo>

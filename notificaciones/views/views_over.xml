@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="expediente.exp_form_over">
+      <field name="name">Estados de Notificacion Relacionados Con la Tarea</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='movimientos']" position="after">
+
+          <!-- solo plazos -->
+          <button name="plazos_asociados" type="object" string="Sin Plazos" context="{'id_activo': id}" attrs="{'invisible':[('estado_plazos', '!=', 'Sin_plazo')]}"/>
+
+          <button name="plazos_asociados" type="object" string="1 Plazo Agendado" context="{'id_activo': id}"
+                  style="background-color: #00cc00;" attrs="{'invisible':[('estado_plazos', '!=', 'Un_plazo')]}" />
+
+          <button name="plazos_asociados" type="object" string="Mas de un plazo agendado" context="{'id_activo': id}"
+                  style="background-color: #00cc00;" attrs="{'invisible':[('estado_plazos', '!=', 'Mas_plazo')]}" />
+
+          <button name="plazos_asociados" type="object" string="Plazo Vencido" context="{'id_activo': id}"
+                  style="background-color: #ff9999;" attrs="{'invisible':[('estado_plazos', '!=', 'Vencido')]}" />
+
+          <button name="plazos" type="object" string="Plazo Vencido" context="{'id_activo': id}"
+                  style="background-color: #ff9999;" attrs="{'invisible':[('estado_plazos', '!=', 'Vencido_todos')]}" />
+
+          <!-- solo plazos -->
+
+          <button name="plazos" type="object" string="Plazos Agendados" context="{'id_activo': id}"
+                  style="background-color: #00cc00;" attrs="{'invisible':[('estado_plazos', '!=', 'Todos_plazos_notificados')]}" />
+
+          <button name="plazos_asociados" type="object" string="Tarea con Plazo/s Asociado/s" context="{'id_activo': id}"
+                  style="background-color:yellow;" attrs="{'invisible':[('estado_plazos', '!=', 'Plazos_asociados')]}" />
+
+          <button name="plazos_asociados" type="object" string="Plazos Suspendidos" context="{'id_activo': id}"
+                  style="background-color:yellow;" attrs="{'invisible':[('estado_plazos', '!=', 'Plazos_suspendidos')]}" />
+
+        </xpath>
+
+        <xpath expr="//field[@name='solicitante']" position="after">
+          <field name="estado_plazos"  string="EstadoPlazo" invisible="1" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+ </odoo>

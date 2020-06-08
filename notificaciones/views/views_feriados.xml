@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="notificaciones.feriados_list">
+      <field name="name">Lista de Feriados</field>
+      <field name="model">feriados</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="notificaciones.feriados_form">
+      <field name="name">Formulario de Feriados</field>
+      <field name="model">feriados</field>
+      <field name="arch" type="xml">
+      <form string="Feriados">
+      <header>
+        <separator string="Feriado" colspan="4" invisible='1'/>
+        <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
+        </header>
+          <group><button name="activar" type="object" states="draft" string="Validar" class="oe_highlight" context="{'id_activo': id}" confirm="Si confirma la validacion, no podra modificar el feriado."/></group>
+          <group><field name="name" attrs="{'readonly':[('state','!=', 'draft')]}"/></group>
+          <group><field name="fecha" attrs="{'readonly':[('state','!=', 'draft')]}"/></group>
+          <field name="id" invisible='1'/>
+      </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="notificaciones.feriados_action_window">
+      <field name="name">Feriados</field>
+      <field name="res_model">feriados</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+     <menuitem name="Feriados" id="notificaciones.menu_1_list" parent="gepromi.config"
+              action="notificaciones.feriados_action_window" />
+
+  </data>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="plantilla.tarea_form3">
+      <field name="name">Plantillas Relacionadas Con la Tarea</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='estado_legal_actual']" position="after">
+            <button name="plantillas" type="object" string="Ver Plantillas" context="{'id_activo': id}"/>
+          <!--   <button name="plantillas" type="object" string="Administrar Adjuntos" context="{'id_activo': id}"/>   -->
+        </xpath>
+      </field>
+    </record>
+  </data>
+ </odoo>

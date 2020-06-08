@@ -1,0 +1,186 @@
+<odoo>
+  <data>
+
+      <!-- VOLVIENDO DESDE SUBFLUJO A LA TAREA ANTERIOR A QUE ENTRARA AL MISMO -->
+          <record model="ir.ui.view" id="tarea_flujo_exp.exp_pop_prox_tarea">
+      <field name="name">Enviar a la Proxima Tarea</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+      <form string="Ingrese Nueva Plantilla">
+        <header>
+        </header>
+                <separator string=" Seleccione la próxima tarea." attrs="{'invisible':[('en_flujo','!=', True)]}" />
+                <separator string=" Seleccione Tarea Actual." attrs="{'invisible':[('en_flujo','!=', False)]}" />
+            <group>
+
+                <field name="name" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                <field name="en_flujo" invisible="0" string="En Flujo"   />
+                <!-- groups="tarea_flujo_exp.access_group_expte_flujo_si"
+                on_change="onchange_no_sacar(en_flujo)" -->
+
+                <field name="tarea_actual" attrs="{'readonly':[('en_flujo','!=', False)]}"   on_change="onchange_define_pase(tarea_actual)"/>
+                <!--domain="[('id','in', actual_tarea_list)]"-->
+                <field name="tarea_proxima"  on_change="onchange_define_pase(tarea_proxima)"
+                 attrs="{'readonly':[('en_flujo','!=', True)]}" />
+                <!--domain="['|',('id','in', proxima_tarea_list),('id','=', False)]"-->
+                <field name="ubicacion_actual" invisible="0" attrs="{'readonly': True}" />
+                <field name="oficina_destino" invisible="0" attrs="{'readonly': True}" />
+                <field name="folios" invisible="0"  />
+                <field name="observ_pase" invisible="0"/>
+
+
+            </group>
+          <field name="state" invisible="1" />
+
+          <field name="id" invisible="1" />
+          <footer>
+              <button name="proxima_tarea_enviar" type="object" string="Enviar"
+              class="oe_highlight"
+                      context="{'tarea_actual_new': tarea_actual,
+                                'tarea_proxima_cont': tarea_proxima,
+                                'fojas_new': folios,
+                                'oficina_destino_new': oficina_destino,
+                                'observaciones_new': observ_pase,
+                                'id_activo': id,
+                                'en_flujo_new': en_flujo,
+                                'vista_padre': 'form' } "
+              confirm="Por favor controlar la cantidad de folios. Cancele este mensaje para corregir." />
+              <!-- <button string="Enviar" class="btn-default" special="cancel"/> -->
+             <!--  <button string="Cancelar" class="btn-default" special="cancel" context="{ 'vista_padre': 'form' } "/> -->
+               <button string="Cancelar" class="btn-default" name="cancel_return_mi_oficina" type="object" states="active"
+                   context="{'vista_padre': 'view'}" />
+          </footer>
+
+
+      </form>
+      </field>
+    </record>
+            <!--FIN VOLVIENDO DESDE SUBFLUJO A LA TAREA ANTERIOR A QUE ENTRARA AL MISMO -->
+
+
+    <record model="ir.ui.view" id="tarea_flujo_exp.exp_pop_prox_tarea">
+      <field name="name">Enviar a la Proxima Tarea</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+      <form string="Ingrese Nueva Plantilla">
+        <header>
+        </header>
+                <separator string=" Seleccione la próxima tarea." attrs="{'invisible':[('en_flujo','!=', True)]}" />
+                <separator string=" Seleccione Tarea Actual." attrs="{'invisible':[('en_flujo','!=', False)]}" />
+            <group>
+                <field name="name" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                <field name="en_flujo" invisible="0" string="En Flujo"   />
+                <!-- groups="tarea_flujo_exp.access_group_expte_flujo_si"
+                on_change="onchange_no_sacar(en_flujo)" -->
+
+                <field name="tarea_actual" attrs="{'readonly':[('en_flujo','!=', False)]}" on_change="onchange_define_pase(tarea_actual)"/>
+                <!--domain="[('id','in', actual_tarea_list)]" -->
+                <field name="tarea_proxima"  on_change="onchange_define_pase(tarea_proxima)"
+                 attrs="{'readonly':[('en_flujo','!=', True)]}" />
+                <!--  domain="['|',('id','in', proxima_tarea_list),('id','=', False)]"  -->
+                <field name="ubicacion_actual" invisible="0" attrs="{'readonly': True}" />
+                <field name="oficina_destino" invisible="0" attrs="{'readonly': True}" />
+                <field name="folios" invisible="0"  />
+                <field name="observ_pase" invisible="0"/>
+            </group>
+          <field name="state" invisible="1" />
+
+          <field name="id" invisible="1" />
+          <footer>
+              <button name="ingresar_flujo_ultima" type="object" string="Ingresar en flujo"
+                        class="oe_highlight" attrs="{'invisible':[('en_flujo','=', True)]}"
+                        context="{'tarea_actual_new': tarea_actual,
+                                'tarea_proxima_cont': tarea_proxima,
+                                'fojas_new': folios,
+                                'oficina_destino_new': oficina_destino,
+                                'observaciones_new': observ_pase,
+                                'id_activo': id,
+                                'en_flujo_new': en_flujo,
+                                'vista_padre': 'form' } "
+                        confirm="El documento ingresará en la última tarea registrada en el Historial de Tareas." /><!--  groups="tarea_flujo_exp.access_group_expte_flujo_si" -->
+
+
+              <button name="proxima_tarea_enviar" type="object" string="Enviar"
+              class="oe_highlight"
+                      context="{'tarea_actual_new': tarea_actual,
+                                'tarea_proxima_cont': tarea_proxima,
+                                'fojas_new': folios,
+                                'oficina_destino_new': oficina_destino,
+                                'observaciones_new': observ_pase,
+                                'id_activo': id,
+                                'en_flujo_new': en_flujo,
+                                'vista_padre': 'form' } "
+              confirm="Por favor controlar la cantidad de folios. Cancele este mensaje para corregir." />
+
+              <!-- <button string="Enviar" class="btn-default" special="cancel"/> -->
+             <!--  <button string="Cancelar" class="btn-default" special="cancel" context="{ 'vista_padre': 'form' } "/> -->
+               <button string="Cancelar" class="btn-default" name="cancel_return_mi_oficina" type="object" states="active"
+                   context="{'vista_padre': 'view'}" />
+          </footer>
+
+
+      </form>
+      </field>
+    </record>
+
+
+
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="tarea_flujo_exp.expediente_form5">
+      <field name="name">Tarea Actual</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='ubicacion_actual']" position="after">
+            <field name="tarea_actual" />
+            <!-- <separator string=" Enviar a la siguiente tarea." />
+            <field name="tarea_proxima" />
+            <button name="plantillas" type="object" string="Enviar" context="{'id_activo': id}"/>
+            -->
+        </xpath>
+       <!--
+    <xpath expr="/form/*" position="before">
+        <header>
+        <button name="proxima_tarea" type="object" string="Enviar ... " context="{'id_activo': id}" />
+        </header>
+    </xpath>
+      -->
+        <xpath expr="//button[@name='activar']"  position='replace'>
+                      <button name="activar" type="object" states="draft" string="Validar" class="oe_highlight"
+                    confirm="Si confirma la validacion, no podra modificar el documento."
+                    groups="expediente.access_group_expte_escritura, expediente.access_group_expte_creacion"
+                    context="{'id_activo': id}"/>
+        </xpath>
+
+    <xpath expr="//button[@name='movimientos']"  position="after">
+        <button name="movimientos" type="object" string="Historial de Tareas" context="{'id_activo': id, 'tipo_historia': 'tarea'}" class="btn-default"  attrs="{'invisible':[('state', '=', 'draft')]}"/>
+        <button name="proxima_tarea" type="object" string="Enviar ... " context="{'id_activo': id, 'vista_padre': 'form'}" class="oe_highlight"
+                attrs="{'invisible':[('state', '!=', 'active')]}"/>
+    </xpath>
+      </field>
+    </record>
+
+<!-- REEMPLAZANDO EL BOTON ENVIAR ORIGINAL DE LA TREEVIEW -->
+    <record model="ir.ui.view" id="tarea_flujo_exp.expediente_tree_view">
+      <field name="name">Enviar Tarea Tree View</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.mi_oficina_list"/>
+      <field name="arch" type="xml">
+          <xpath expr="//button[@name='enviar']" position="attributes">
+                <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='ubicacion_actual']" position="after">
+              <field name="en_flujo"  readonly="1" />
+            <button name="proxima_tarea" type="object" string="Enviar ... " context="{'id_activo': id, 'vista_padre': 'view', 'default_tarea_proxima': False}"
+                    attrs="{'invisible':[('state', '!=', 'active')]}"/>
+          </xpath>
+
+      </field>
+    </record>
+
+
+
+  </data>
+
+ </odoo>

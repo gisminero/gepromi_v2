@@ -1,0 +1,69 @@
+<odoo>
+
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="flujolist_form">
+      <field name="name">tarea_flujo.flujolist.form</field>
+      <field name="model">tarea_flujo.flujo</field>
+      <field name="arch" type="xml">
+        <form string="Flujo de Tareas">
+            <group>
+                <field name="id"/>
+                <field name="name" domain="[('active', '=', True)]" />
+                <button name="obtener_id" type="object"  string="Editar Flujo"
+                    class="oe_highlight" context="{'id_activo': name}"/>
+                <button name="exportar" type="object"  string="Exportar"
+                    class="oe_highlight" context="{'id_activo': id}"/>
+                <field name="csvfilename" invisible="1"/>
+                <field name="filebinary" filename="csvfilename"/>
+            </group>
+        <field name="lineflujo_ids" nolabel="1" colspan="1">
+            <tree string="Flujo de Tareas" editable="bottom">
+                <field name="id"/>
+                <field name="tarea_padre" domain="[('active', '=', True)]" on_change="tareaSusp(tarea_padre)"/>
+                <field name="tarea" domain="[('active', '=', True)]" on_change="tareaInicial(tarea,tarea_padre)"/>
+                <field name="descrip"/>
+
+            </tree>
+        </field>
+        </form>
+      </field>
+    </record>
+
+
+        <record id="flujolist_tree" model="ir.ui.view">
+            <field name="name">tarea_flujo.flujolinea.tree</field>
+            <field name="model">tarea_flujo.flujolinea</field>
+            <field name="arch" type="xml">
+                <tree string="Lineas">
+                    <field name="tarea_padre"/>
+                    <field name="tarea" />
+                    <field name="descrip"/>
+                </tree>
+
+            </field>
+<!--            <field name="observaciones"/>-->
+        </record>
+
+
+    <!-- actions opening views on models -->
+    <!--     -->
+    <record model="ir.actions.act_window" id="flujoaction_window2">
+      <field name="name">Config de Flujos de Tareas</field>
+      <field name="res_model">tarea_flujo.flujo</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Flujo de Tareas" id="tarea.menu_flujo" parent="gepromi.config"
+    action="flujoaction_window2"  />
+      <!-- NO SE VE EL GRUPO CONFIG
+      groups="gepromi.group_gepromi_config"
+      #access_tareaflujolinea_tareaflujolinea,tarea.tareaflujolinea,model_tarea_flujo_flujolinea,gepromi.group_gepromi_config,1,1,1,1
+#saccess_tareaflujo,tareaflujo.tareaflujo,model_tarea_flujo_flujo,gepromi.group_gepromi_config,1,1,1,1
+       -->
+  </data>
+
+
+</odoo>

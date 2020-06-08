@@ -1,0 +1,77 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="procedimiento.list">
+      <field name="name">procedimiento list</field>
+      <field name="model">procedimiento.procedimiento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="iniciado"/>
+          <field name="susplazo"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="procedimiento.form">
+      <field name="name">procedimiento form</field>
+      <field name="model">procedimiento.procedimiento</field>
+      <field name="arch" type="xml">
+      <form string="Sales Receipt">
+        <header>
+        <separator string="Nuevo Procedimiento" colspan="4"/>
+        </header>
+        <group>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="iniciado"/>
+          <field name="susplazo"/>
+         </group>
+      </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="procedimiento.action_window">
+      <field name="name">Procedimiento Window</field>
+      <field name="res_model">procedimiento.procedimiento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="procedimiento.action_server">
+      <field name="name">procedimiento server</field>
+      <field name="model_id" ref="model_procedimiento_procedimiento"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="procedimiento" id="procedimiento.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="procedimiento.menu_1" parent="procedimiento.menu_root"/>
+    <menuitem name="Menu 2" id="procedimiento.menu_2" parent="procedimiento.menu_root"/>
+    -->
+    <!-- actions -->
+
+     <menuitem name="Procedimiento" id="procedimiento.menu_1_list" parent="gepromi.config"
+              action="procedimiento.action_window"/>
+    <!-- <menuitem name="Server to list" id="procedimiento" parent="procedimiento.menu_2"
+              action="procedimiento.action_server"/>
+    -->
+  </data>
+</odoo>

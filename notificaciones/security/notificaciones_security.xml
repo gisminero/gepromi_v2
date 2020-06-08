@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="notificaciones.module_config" >
+      <field name="name">GeProMi. Eventos y Alertas</field>
+      <field name="description">Configurar Alertas que se envian al vencimiento de Eventos.</field>
+      <field name="sequence">6</field>
+    </record>
+
+   <record id="group_alerta_evento_vencido" model="res.groups">
+     <field name="name">Recibir Alertas de Eventos Vencidos</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="notificaciones.module_config"/>
+    </record>
+
+   <record id="group_config_notif_lect" model="res.groups">
+     <field name="name">Solo Lectura Eventos</field>
+     <field name="implied_ids" eval="[(4, ref('notificaciones.group_alerta_evento_vencido'))]"/>
+ <!--   <field name="users" eval="[(4, ref('base.user_root'))]"/>  -->
+     <field name="category_id" ref="notificaciones.module_config"/>
+    </record>
+
+   <record id="group_config_notif_write" model="res.groups">
+     <field name="name">Recibir Documentacion</field>
+     <field name="implied_ids" eval="[(4, ref('notificaciones.group_config_notif_lect'))]"/>
+   <!--  <field name="users" eval="[(4, ref('base.user_root'))]"/> -->
+     <field name="category_id" ref="notificaciones.module_config"/>
+    </record>
+
+
+   <record id="group_config_notif_crea" model="res.groups">
+     <field name="name">Crear/Eliminar Eventos</field>
+     <field name="implied_ids" eval="[(4, ref('notificaciones.group_config_notif_write'))]"/>
+   <!--  <field name="users" eval="[(4, ref('base.user_root'))]"/> -->
+     <field name="category_id" ref="notificaciones.module_config"/>
+    </record>
+
+</odoo>

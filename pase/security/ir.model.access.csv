@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pase_pase_exp,pase.pase,model_pase_pase,expediente.access_group_expte_creacion,1,1,1,1
+access_pase_pase_crea,pase.pase,model_pase_pase,access_group_pase_creacion,1,1,1,1
+access_pase_pase_escr,pase.pase,model_pase_pase,access_group_pase_escritura,1,1,0,0
+access_pase_pase_lect,pase.pase,model_pase_pase,access_group_pase_lectura,1,0,0,0

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.module.category" id="module_management_flujo" >
+      <field name="name">GeProMi.Ingresar en Flujo</field>
+      <field name="description">Controla si el usuario tiene permisos para ingresar expedientes en el flujo.</field>
+      <field name="sequence">6</field>
+    </record>
+
+ <!--
+    <record id="access_group_expte_flujo_no" model="res.groups">
+     <field name="name">No</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="tarea_flujo_exp.module_management_flujo"/>
+    </record>
+  -->
+   <record id="access_group_expte_flujo_si" model="res.groups">
+     <field name="name">Ingresar_en_flujo</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="tarea_flujo_exp.module_management_flujo"/>
+    </record>
+
+      <!--
+      <record id="access_group_expte_flujo_super" model="res.groups">
+     <field name="name">Si Super</field>
+     <field name="implied_ids" eval="[(4, ref('expediente.access_group_expte_flujo'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="expediente.module_management_flujo2"/>
+    </record>
+    -->
+
+    <record model="ir.module.category" id="tarea_flujo_exp.seguimiento" >
+      <field name="name">GeProMi.Seguimiento Tareas</field>
+      <field name="description">Niveles de acceso a Seguimiento por tareas.</field>
+      <field name="sequence">7</field>
+    </record>
+
+
+   <record id="access_group_seguimiento_lectura" model="res.groups">
+     <field name="name">Solo Lectura</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="tarea_flujo_exp.seguimiento"/>
+    </record>
+
+    <record id="access_group_seguimiento_escritura" model="res.groups">
+      <field name="name">Lectura/Escritura</field>
+      <field name="implied_ids" eval="[(4, ref('access_group_seguimiento_lectura'))]"/>
+   <field name="category_id" ref="tarea_flujo_exp.seguimiento"/>
+    </record>
+
+    <record id="access_group_seguimiento_creacion" model="res.groups">
+      <field name="name">Crear</field>
+      <field name="implied_ids" eval="[(4, ref('access_group_seguimiento_escritura'))]"/>
+    <field name="category_id" ref="tarea_flujo_exp.seguimiento"/>
+    </record>
+
+     <record id="access_group_seguimiento_auditoria" model="res.groups">
+      <field name="name">Auditoria/Eliminar</field>
+      <field name="implied_ids" eval="[(4, ref('access_group_seguimiento_creacion'))]"/>
+    <field name="category_id" ref="tarea_flujo_exp.seguimiento"/>
+    </record>
+
+</odoo>
+
+

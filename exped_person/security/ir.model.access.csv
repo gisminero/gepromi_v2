@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exped_person_recep,exped_person.recep,model_exped_person,access_group_exped_person,1,1,1,1
+access_exped_person_asign,exped_person.person,model_exped_person,access_group_exped_person_asign,1,1,1,1

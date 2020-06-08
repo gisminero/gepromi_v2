@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+
+
+    <record model="ir.ui.view" id="exped_person.list">
+      <field name="name">Seguimiento por Personas</field>
+      <field name="model">exped_person</field>
+      <field name="arch" type="xml">
+        <tree>
+<field name="name"/>
+          <field name="expediente_id"/>
+          <field name="empleado_seg"/>
+          <field name="recibir" />
+          <!--  attrs="{'invisible':[('state', '!=', 'active')]}"  domain="[('department_id', '=', 'ubicacion_actual')]"-->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="exped_person.form">
+      <field name="name">Seguimiento por Persnas</field>
+      <field name="model">exped_person</field>
+      <field name="arch" type="xml">
+      <form string="Seguimiento por Personas" options="{'no_create_edit':True}">
+        <header>
+        </header>
+            <group>
+              <field name="name"/>
+              <field name="expediente_id"/>
+              <field name="empleado_seg"  invisible="context.get('permiso_asignacion',False)"  domain="[('id','in', usuarios_oficina)]" />
+              <!-- domain="[('department_id', '=', expediente_id.ubicacion_actual.id)]" -->
+              <field name="recibir" />
+
+            </group>
+        <footer>
+                     <button name="recibir_asignacion" type="object" string="Aceptar Asignacion" context="{'id_activo': id, 'empleado_seg': id}" class="oe_highlight"
+                       attrs="{'invisible':[('recibir', '=', False), ('empleado_seg', '=', False)]}" />
+          <!-- attrs="{'invisible':[('recibir', '=', False), ('empleado_seg', '=', False)]}"  invisible="context.get('mostrar_recepcion',False)" -->
+
+                    <button name="guardar_envio" type="object" string="Asignar" class="oe_highlight"
+                            context="{'empleado_seg': empleado_seg}" invisible="context.get('permiso_asignacion',False)" />
+
+				 	<button string="Cancelar" class="btn-default" special="cancel" />
+				<!--	<button string="Ok" class="btn-default" name="reload_view" type="object"  /> -->
+		</footer>
+      </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="exped_person.lista">
+      <field name="name">Auditoria de Tareas Realizadas</field>
+      <field name="res_model">exped_person</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Seguimiento por Personas" id="exped_person.lista_menu" parent="gepromi.config"  action="exped_person.lista"/>
+
+  </data>
+</odoo>

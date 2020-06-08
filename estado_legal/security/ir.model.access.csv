@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estado_legal_estado_legal,estado_legal.estado_legal,model_estado_legal_estado_legal,,1,0,0,0

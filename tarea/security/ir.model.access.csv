@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tarea_tarea,tarea.tarea,model_tarea_tarea,gepromi.group_gepromi_config,1,1,1,1
+access_plazo_plazo,plazo.plazo,model_tarea_plazo,gepromi.group_gepromi_config,1,1,1,1
+access_tarea_tarea2,tarea.tarea2,model_tarea_tarea,expediente.access_group_expte_lectura,1,0,0,0
+access_plazo_plazo2,plazo.plazo2,model_tarea_plazo,expediente.access_group_expte_lectura,1,0,0,0

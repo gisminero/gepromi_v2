@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gestion_doc_digital_listar,doc_digital.listar,model_doc_digital,access_group_descarga,1,0,0,0
+gestion_doc_digital_arch_listar,doc_digital_arch.listar,model_doc_digital_archivo,access_group_descarga,1,0,0,0
+gestion_doc_digital_descarga,doc_digital.descarga,model_doc_digital,access_group_descarga,1,0,0,0
+gestion_doc_digital_arch_descarga,doc_digital_arch.descarga,model_doc_digital_archivo,access_group_descarga,1,0,0,0
+gestion_doc_digital_gestion,doc_digital.gestion,model_doc_digital,access_group_carga,1,1,1,0
+gestion_doc_digital_arch_gestion,doc_digital_arch.gestion,model_doc_digital_archivo,access_group_carga,1,1,1,1
+gestion_doc_digital_admin,doc_digital.admin,model_doc_digital,access_group_admin,1,1,1,1
+gestion_doc_digital_arch_admin,doc_digital_arch.admin,model_doc_digital_archivo,access_group_admin,1,1,1,1

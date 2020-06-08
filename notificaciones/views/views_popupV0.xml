@@ -1,0 +1,146 @@
+<odoo>
+
+<data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="notificaciones.notifica_list">
+      <field name="name">Lista de Notificaciones Activas</field>
+      <field name="model">notifica</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha_notificacion"/>
+          <field name="fecha_vencimiento"/>
+          <field name="state"/>
+          <field name="alertas_enviados"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="notificaciones.notifica_form">
+      <field name="name">Crear Notificacion</field>
+      <field name="model">notifica</field>
+      <field name="arch" type="xml">
+      <form string="Creando Evento">
+        <header>
+        <field name="state" widget="statusbar" statusbar_visible="draft,active,cumplido,vencido"/>
+        </header>
+            <separator string="Creando Evento Asociado a Notificacion" colspan="4"/>
+             <group>
+                  <field name="name"   nolabel="1" colspan="1"/>
+                  <!--  attrs="{'readonly':[('state','!=', 'draft')]}"  -->
+                    <button name="activar" type="object" states="draft" string="Validar"
+                    class="oe_highlight" context="{'id_activo': id}"/>
+                    <!--     confirm="Si confirma la validacion, no podra modificar el alerta."
+                    groups="group_config_notif_crea"
+                    context="{'id_activo': id}"   -->
+                    <button name="recibir" type="object" states="active" string="Documentacion Recibida"
+                    class="oe_highlight" context="{'id_activo': id}" confirm="Recibo documentacion para anexar al expediente."
+                    groups="group_config_notif_write"/>
+            </group>
+        <group>
+        <field name="id" invisible="1" />
+          <field name="expediente_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <!--   on_change="nombrePlazo(expediente_id, plazo_id)"   -->
+          <field name="plazo_id"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <!--   on_change="nombrePlazo(expediente_id, plazo_id)"   -->
+          <field name="fecha_notificacion"  attrs="{'readonly':[('state','!=', 'draft')]}" />
+          <!--  on_change="onchangeInicioNotifica(fecha_notificacion, plazo_id)"  -->
+          <field name="fecha_vencimiento" />
+           <field name="alertas_enviados"/>
+          <field name="user_creador_id"/>
+          <field name="info" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+         </group>
+      </form>
+      </field>
+    </record>
+
+
+
+    <!-- ALERTA -->
+    <record model="ir.ui.view" id="notificaciones.alerta_list">
+      <field name="name">Lista Alertas para Mi</field>
+      <field name="model">alerta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="id" invisible="0" />
+          <field name="notificacion_id"/>
+          <field name="user_alerta_id"/>
+          <field name="alerta_recibido"/>
+          <button name="recibido" type="object"  string="Notificado"
+                    class="oe_highlight" context="{'id_activo': id}"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="notificaciones.alerta_form">
+      <field name="name">Alerta de Notificacion</field>
+      <field name="model">alerta</field>
+      <field name="arch" type="xml">
+      <form string="Alerta de Notificacion">
+        <header>
+        </header>
+        <separator string="Alerta de Notificacion" colspan="4"/>
+         <group>
+        </group>
+        <group>
+          <field name="id" invisible="1" />
+          <field name="notificacion_id" />
+          <field name="user_alerta_id"/>
+          <field name="alerta_recibido"/>
+        </group>
+      </form>
+      </field>
+    </record>
+<!--   -->
+
+
+
+
+
+
+    <record model="ir.actions.act_window" id="notificaciones.notifica_action_window">
+      <field name="name">Creacion de Notificacion</field>
+      <field name="res_model">notifica</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+<record model="ir.actions.server" id="notificaciones.alerta_mis_alertas">
+    <field name="name">Alertas para mi</field>
+    <field name="model_id" ref="model_alerta"/>
+    <field name="code">
+res = env['alerta'].select_target()
+if res == 'new':
+    action =    {
+            'name': "Mis Alertas Pendientes",
+            'view_mode': 'tree, form',
+            'res_model': 'alerta',
+            'type': 'ir.actions.act_window',
+            'domain': [('user_alerta_id', '=', env['alerta'].default_user_id()), ('alerta_recibido', '=', False)],
+            'views': [[env.ref('notificaciones.alerta_list').id, "tree"], [env.ref('notificaciones.alerta_form').id, "form"]],
+            'target': 'new',
+            }
+else:
+    action =   {
+            'name': "Expedientes en Mi Oficina",
+            'view_mode': 'tree, form',
+            'res_model': 'expediente.expediente',
+            'type': 'ir.actions.act_window',
+            'domain': [('ubicacion_actual', '=', env['expediente.expediente'].depart_user())],
+            'views': [[env.ref('expediente.mi_oficina_list').id, "tree"], [env.ref('expediente.form').id, "form"]],
+            }
+    </field>
+</record>
+
+
+
+    <menuitem name="Mis Eventos" id="notificaciones.menu_list" parent="gepromi.notifica"
+        action="notificaciones.notifica_action_window"/>
+
+    <menuitem name="Mis Alertas" id="notificaciones.alerta_server_list" parent="gepromi.notifica"
+             action="notificaciones.alerta_mis_alertas"/>
+
+
+
+  </data>
+</odoo>

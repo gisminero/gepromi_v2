@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="expediente.module_management" >
+      <field name="name">GeProMi.Expediente</field>
+      <field name="description">Niveles de acceso a expedientes.</field>
+      <field name="sequence">1</field>
+    </record>
+
+
+   <record id="access_group_expte_lectura" model="res.groups">
+     <field name="name">Solo Lectura</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="expediente.module_management"/>
+    </record>
+
+    <record id="access_group_expte_escritura" model="res.groups">
+      <field name="name">Lectura/Escritura</field>
+      <field name="implied_ids" eval="[(4, ref('expediente.access_group_expte_lectura'))]"/>
+   <field name="category_id" ref="expediente.module_management"/>
+    </record>
+
+    <record id="access_group_expte_creacion" model="res.groups">
+      <field name="name">Crear/Eliminar</field>
+      <field name="implied_ids" eval="[(4, ref('expediente.access_group_expte_escritura'))]"/>
+    <field name="category_id" ref="expediente.module_management"/>
+    </record>
+
+
+</odoo>

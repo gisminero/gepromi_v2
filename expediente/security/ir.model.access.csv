@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_expte_lect,expediente.expediente,model_expediente_expediente,access_group_expte_lectura,1,0,0,0
+access_expte_escr,expediente.expediente,model_expediente_expediente,access_group_expte_escritura,1,1,0,0
+access_expte_crea,expediente.expediente,model_expediente_expediente,access_group_expte_creacion,1,1,1,1
+access_proced_lect,procedimiento.procedimiento,procedimiento.model_procedimiento_procedimiento,access_group_expte_lectura,1,0,0,0
+access_tarea_lect,tarea.tarea,tarea.model_tarea_tarea,access_group_expte_lectura,1,0,0,0
+access_plazo_lect,tarea.plazo,tarea.model_tarea_plazo,access_group_expte_lectura,1,0,0,0
+access_mineral_lect,mineral,mineral.model_mineral,access_group_expte_lectura,1,1,1,0
+access_hr_lect,hr.hr,hr.model_hr_employee,access_group_expte_escritura,1,0,0,0
+access_hr_dep_lect,hr.dep,hr.model_hr_department,access_group_expte_escritura,1,0,0,0
+access_estado_legal_lect,estado_legal.estado_legal,model_estado_legal_estado_legal,access_group_expte_lectura,1,0,0,0
+access_depart_lect,departamento.departamento,departamento.model_departamento_departamento,access_group_expte_lectura,1,0,0,0

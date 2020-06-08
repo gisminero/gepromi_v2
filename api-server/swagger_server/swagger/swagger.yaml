@@ -1,0 +1,111 @@
+---
+swagger: "2.0"
+info:
+  description: "Recursos ofrecidos por el Tramite de la Concesion Minera Provincial\
+    \ - ARG 12/017"
+  version: "1.0.0"
+  title: "Mineria Provincial - Recursos API"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/dariojr/mineria-provincial-api/1.0.0"
+tags:
+- name: "expedientes"
+  description: "Punto de Acceso para buscar expediente segun texto"
+- name: "estado"
+  description: "Punto de acceso para averiguar el estado legal de un numero de expediente\
+    \ valido"
+schemes:
+- "https"
+paths:
+  /estado:
+    get:
+      tags:
+      - "developers"
+      summary: "Buscar todos los registros coincidentes a un numero de expediente."
+      description: "Tenga en cuenta las caracteristicas propias del expediente valido\
+        \ de su provincia.\n"
+      operationId: "search_expediente"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "searchString"
+        in: "query"
+        description: "pasar un string para busqueda en el campo name"
+        required: true
+        type: "string"
+      - name: "skip"
+        in: "query"
+        description: "number of records to skip for pagination"
+        required: false
+        type: "integer"
+        minimum: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "maximum number of records to return"
+        required: false
+        type: "integer"
+        maximum: 50
+        minimum: 0
+        format: "int32"
+      responses:
+        "200":
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EstadoItem"
+        "400":
+          description: "bad input parameter"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+    post:
+      tags:
+      - "developers"
+      summary: "Obtener estado legal de un expediente."
+      description: "Adds an item to the system"
+      operationId: "buscar_estado"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "estadoItem"
+        description: "Inventory item to add"
+        required: false
+        schema:
+          $ref: "#/definitions/EstadoItem"
+      responses:
+        "201":
+          description: "item encontrado"
+        "400":
+          description: "nombre de expediente invalido - object invalid"
+        "409":
+          description: "existe mas de un resultado, contacte al administrador"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+definitions:
+  EstadoItem:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Widget Adapter"
+      releaseDate:
+        type: "string"
+        format: "date-time"
+        example: "2016-08-29T09:12:33.001Z"
+    example:
+      releaseDate: "2016-08-29T09:12:33.001Z"
+      name: "Widget Adapter"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
