@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Base",
+    'name': "SIGETRAMI Base",
 
     'summary': """
         Modulo base de la aplicacion

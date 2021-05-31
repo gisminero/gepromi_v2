@@ -15,10 +15,24 @@
     </record>
 
 
+    <record model="ir.module.category" id="gepromi.module_report" >
+      <field name="name">GeProMi. Menu Reportes</field>
+      <field name="description">Tiene acceso al menu reportes.</field>
+      <field name="sequence">5</field>
+    </record>
+
+
+   <record id="gepromi.group_gepromi_report" model="res.groups">
+     <field name="name">Si</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="gepromi.module_report"/>
+    </record>
+
     <record model="ir.module.category" id="gepromi.module_notif" >
       <field name="name">GeProMi. Menu Notificaciones</field>
       <field name="description">Tiene acceso al menu Notificaciones.</field>
-      <field name="sequence">5</field>
+      <field name="sequence">6</field>
     </record>
 
 
@@ -28,5 +42,8 @@
      <field name="users" eval="[(4, ref('base.user_root'))]"/>
      <field name="category_id" ref="gepromi.module_notif"/>
     </record>
+
+
+
 
 </odoo>

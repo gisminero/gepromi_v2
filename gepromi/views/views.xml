@@ -4,12 +4,14 @@
 
     <!-- Top menu item -->
     <!--     -->
-    <menuitem name="GeTraMi Exp." id="gepromi.menu_root" sequence="0"/>
-    <menuitem name="GeTraMi Config." id="gepromi.menu_root_conf" sequence="1" groups="gepromi.group_gepromi_config"/>
+    <menuitem name="Expedientes" id="gepromi.menu_root" sequence="0"/>
+    <menuitem name="Reportes" id="gepromi.menu_root_report" sequence="1" groups="gepromi.group_gepromi_report"/>
+    <menuitem name="Configuración" id="gepromi.menu_root_conf" sequence="2" groups="gepromi.group_gepromi_config"/>
 
     <!-- menu categories -->
 
     <menuitem name="Expediente" id="gepromi.inicio" parent="gepromi.menu_root"/>
+    <menuitem name="Administración" id="gepromi.administracion" parent="gepromi.menu_root"/>
     <menuitem name="Notificaciones" id="gepromi.notifica" parent="gepromi.menu_root"/>
 <!--    <menuitem name="Configuracion" id="gepromi.config" parent="gepromi.menu_root"/> -->
     <menuitem name="Configuracion" id="gepromi.config" parent="gepromi.menu_root_conf"/>
