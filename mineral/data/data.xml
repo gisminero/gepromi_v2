@@ -1,0 +1,96 @@
+<odoo>
+    <data>
+<field name="name"> Abrasivos </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Alabastro </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Aluminio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Amianto </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Antimonio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Antracita </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Arcillas Comunes </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Arenas Metalíferas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Arenas No Metalíferas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Areniscas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Arsénico </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Azufre </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Baritina </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Basaltos </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Bentonita </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Berilio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Bismuto </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Boratos </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Cadmio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Calcáreas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Canto Rodado </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Caolín </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Caparrosas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Cascajo </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Ceniza Volcánica </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Cobalto </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Cobre </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Conchilla </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Cuarcitas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Cuarzo </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Dolomita </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Estaño </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Esteatitas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Feldespato </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Fluorita </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Fosfatos Calizos </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Grafito </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Granitos </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Grava </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Hidrocarburos Sólidos </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Hierro </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Hulla </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Lignito </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Litio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Loes </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Manganeso </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Margas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Mármoles </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Mercurio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Metales no comprendidos en 1° Categ. </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Mica </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Mineral en aguas corrientes </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Mineral en desmontes, relevantes y escoriales </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Mineral en placeres </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Molibdeno </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Níquel </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Ocres </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Oro </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Pedregullo </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Perlita </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedra Afilar </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedra Laja </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedra Pómez </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedra Sapo </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedras Calizas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Piedras Preciosas </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Piedras Preciosas (en lechos de ríos) </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Pizarras </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Plata </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Platino </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Plomo </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Pórfidos </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Potasio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Puzzolanas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Resinas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Sales Alcalinas o Alcalino Terrosas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Salinas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Salitres </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Serpentina </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Tantalio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Tierras Piritosas y Aluminosas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Tobas </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Torio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Tosca </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Turberas </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Uranio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Vanadio </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Vapores Endógenos </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Wolfram </field><field name="categoria"> Primera </field><field name="active"> True </field>
+<field name="name"> Yeso </field><field name="categoria"> Tercera </field><field name="active"> True </field>
+<field name="name"> Zeolitas o Minerales Permutantes </field><field name="categoria"> Segunda </field><field name="active"> True </field>
+<field name="name"> Zinc </field><field name="categoria"> Primera </field><field name="active"> True </field>
+    </data>
+</odoo>
