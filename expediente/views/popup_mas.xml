@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+<!--   FORMULARIO ENVIAR  -->
+    <record model="ir.ui.view" id="expediente.form_popup_mas">
+      <field name="name">Información del Documento</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+      <form string="Información de Documento">
+             <separator string="Información Histórica"/>.
+            <group colspan="1">
+                <p>    <button name="movimientos" type="object"
+                    string="Movimientos de Oficina" context="{'id_activo': id}" class="btn-default" />
+                </p>
+            </group>
+               <footer>
+                    <button string="Cerrar" class="btn-default" special="cancel"/>
+<!--                   <button string="Cerrar" class="btn-default" name="mi_oficina_view" type="object"   />-->
+
+               </footer>
+      </form>
+      </field>
+    </record>
+<!-- fin FORMULARIO ENVIAR -->
+  </data>
+</odoo>

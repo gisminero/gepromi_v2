@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Expediente",
+    'name': "SIGETRAMI Expediente",
 
     'summary': """
-        Corresponde a la entidad nucleo del sistema GEPROMI""",
+        Corresponde a la entidad nucleo del sistema SIGETRAMI""",
 
     'description': """
-        Corresponde a la entidad nucleo del sistema GEPROMI
+        Corresponde a la entidad nucleo del sistema SIGETRAMI
     """,
 
     'author': "Gis Minero Nacional",
@@ -23,14 +23,13 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/expediente_security.xml',
+        'security/ir.model.access.csv',
         'views/views.xml',
         #'views/templates.xml',
         'models/secuence.xml',
-        'security/expediente_security.xml',
-        'security/ir.model.access.csv',
         'reports/pases_report.xml',
-        # 'views/aviso_exp_miof.xml',
+        'views/popup_mas.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

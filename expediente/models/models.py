@@ -5,6 +5,36 @@ from odoo.exceptions import UserError, ValidationError
 from unidecode import unidecode
 import string
 
+class exp_mineral(models.Model):
+    _name = 'exp_mineral'
+    _description = 'Lineas de la grilla mineral'
+    mineral_id = fields.Many2one('mineral', 'Mineral', copy=False, required=True)
+    exp_id = fields.Many2one('expediente.expediente', 'Minerales', required=1, ondelete='cascade')
+    categoria_mineral_exp = fields.Selection([
+        ('Primera', 'Primera'),
+        ('Segunda', 'Segunda'),
+        ('Tercera', 'Tercera'),], required=True,
+        help="Categoria del mineral")
+
+class exp_depart(models.Model):
+    _name = 'exp_depart'
+    _description = 'Lineas de la grilla departamento'
+
+    def default_state(self):
+        return self.env.user.company_id.state_id
+
+    departamento_id = fields.Many2one('departamento.departamento', 'Departamento', copy=False, required=True, )#domain="[('state_id', '=', provincia)]"
+    exp_id = fields.Many2one('expediente.expediente', 'Departamentos', required=1, ondelete='cascade')
+    state_id_exp = fields.Many2one('res.country.state', string="Provincia", default=default_state, store=True, readonly=True)
+
+class exp_solicitantes(models.Model):
+    _name = 'exp_solicitantes'
+    _description = 'Solicitantes'
+
+    solicitante = fields.Char('Solicitante', required=True)
+    solicitante_cuit = fields.Char('CUIT/CUIL/DNI', required=False)
+    exp_id = fields.Many2one('expediente.expediente', 'Solicitantes', required=1, ondelete='cascade')
+
 class expediente(models.Model):
     _name = 'expediente.expediente'
     #_order = "momento_inicio desc"
@@ -32,7 +62,7 @@ class expediente(models.Model):
         user_id = self.env.context.get("default_user_id", self.env.user).id
         id_depart = self.userdepart(user_id)
         #print (("EL ID DE DEPARTAMENTO ES :" + str(id_depart)))
-        return [id_depart]
+        return id_depart
 
     def vista_mi_ofi_texto(self):
         user = self.env.context.get("default_user_id", self.env.user)
@@ -53,6 +83,11 @@ class expediente(models.Model):
             return {'value': {'name': ret_name}}
         else:
             return {'value': {'name': ret_name}}
+
+    @api.onchange('procedimiento_id')
+    def aux_categoria_mineral_onchange(self):
+        # print (("LLAMANDO A ON CHANGUIE DE PROCEDIMIENTO... "))
+        return {'value': {'aux_categoria_mineral': self.procedimiento_id.categoria_mineral}}
 
     @api.one
     @api.depends('provincia')
@@ -79,15 +114,21 @@ class expediente(models.Model):
     def _archivar_exped(self):
         self.state = 'archive'
 
+    def _estadoPlazo(self):
+        self.estado_plazos = str('Sin_plazo')
+
     name = fields.Char('Expediente', required=True, readonly=False, default=default_expte)
     state = fields.Selection([('draft', 'Borrador'), ('active', 'Activo'),
         ('archive', 'Archivo')], string='Estado', required=True, default="draft",
         help="Determina el estado del expediente")
     procedimiento_id = fields.Many2one('procedimiento.procedimiento','Tramite', required=True)
-    solicitante = fields.Char('Solicitante', required=True)
+    solicitante = fields.Char('Solicitante', required=False)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
+    solicitante_cuit = fields.Char('CUIT/CUIL/DNI', required=False)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
+    solicitantes = fields.One2many('exp_solicitantes', 'exp_id', string='Solicitantes', required=False)
     folios = fields.Integer('Folios', help='', default=1)
     estado_legal_actual = fields.Char('Estado Legal Actual', required=False, readonly=True)
-    mineral = fields.Many2many('mineral',string='Mineral',required=False, domain=[('active', '=', True)])
+    estado_legal_actual_id = fields.Many2one('estado_legal.estado_legal', '*Estado Legal Actual', readonly=True)
+    mineral = fields.One2many('exp_mineral', 'exp_id', string='Mineral',required=False)
     nombre_pedimento = fields.Char('Nombre Pedimento', required=False)
     user_creador_id = fields.Many2one('res.users','Creado por', required=False, readonly=True, default=default_user_id)
     momento_inicio = fields.Datetime('Creado el', readonly=True, default=fields.Datetime.now)
@@ -98,14 +139,18 @@ class expediente(models.Model):
     recibido = fields.Boolean('Recibido', readonly=True, compute=_is_recept_doc, store=False)
     observ_pase = fields.Text(string='Observaciones de Pase', translate=True)
     provincia = fields.Many2one('res.country.state', string="Provincia", default=default_state, readonly=True)#, store=True
-    departamento = fields.Many2many('departamento.departamento', string="Departamento",required=False, domain=[('active', '=', True)])
+    departamento = fields.One2many('exp_depart', 'exp_id', string="Departamento", required=False)#, domain=[('departamento_id.state_id', '=', provincia)]
+    # departamento = fields.One2many('departamento.departamento', string="Departamento",required=False, domain=[('active', '=', True)])
     #departamento = fields.Many2one('departamento.departamento', string="Departamento")
     observaciones = fields.Text(string='Observaciones', translate=True)
     empleado = fields.Many2one('hr.employee','Empleado Asignado', readonly=False)
     #_sql_constraints =[('name_uniq_exp', 'unique(name)', 'El numero de Expediente debe ser único para cada trámite')]
+    estado_plazos = fields.Char('Estado de Plazos', compute="_estadoPlazo", required=False)
+    ###CAMPOS QUE NO PERTENECEN AL MODELO#####
+    aux_categoria_mineral = fields.Char('Categoria del Mineral por Defecto', required=False, readonly=True)
 
     def userdepart(self, user_id):
-        num_empl = self.env['hr.employee'].search_count([('user_id', '=', [user_id])])
+        num_empl = self.env['hr.employee'].search_count([('user_id', '=', user_id)])
         if num_empl < 1:
             print (("No se encuentra el empleado asociado al usuario: " + str(user_id)))
             return False
@@ -113,16 +158,22 @@ class expediente(models.Model):
             print (("Hay mas de un emplado asociado al usuario: " + str(user_id)))
             return False
         else:
-            empl_obj = self.env['hr.employee'].search([('user_id', '=', [user_id])])
+            empl_obj = self.env['hr.employee'].search([('user_id', '=', user_id)])
             if empl_obj.department_id.id:
+                # print (("RETORNANDO EL DEPARTAMENTO: " + str(empl_obj.department_id.id)))
                 return empl_obj.department_id.id
             else:
                 print (("EL EMPLEADO NO TIENE OFICINA ASIGNADA"))
                 return False
 
+    @api.multi
     def activar(self):
         active_id = self.env.context.get('id_activo')
-        print (("ACTIVANDO .... " + str(active_id)))
+        # print (("ACTIVANDO .... " + str(lista_param)))
+        print (("EL CONTEXTO: " + str(self.env.context)))
+        # active_id = lista_param['id']
+        print(("EL ID ACTIVO SEGUN EL ULTIMO METODO: " + str(active_id)))
+        # print(("LOS IDS ACTIVOS: " + str(active_ids)))
         user_id = self.env.user.id
         #print ((" CONTEXTO ACTIVANDO ... : " + str(self.env.context)))
         expte_obj = self.browse([active_id])
@@ -161,10 +212,10 @@ class expediente(models.Model):
         #     'views': [[self.env.ref('expediente.list').id, "tree"], [self.env.ref('expediente.form').id, "form"]],
         # }
 
-    """
     @api.multi
     def get_exped_mi_draft(self):
-        print(('LLAMANDO A BORRADORES'))
+        print(('LLAMANDO A BORRADORES#########################'))
+        user_id = self.env.context.get("default_user_id", self.env.user).id
         depart_user_id = self.depart_user()
         if depart_user_id > 0:
             action = {
@@ -172,11 +223,14 @@ class expediente(models.Model):
                 'view_mode': 'tree, form',
                 'res_model': 'expediente.expediente',
                 'type': 'ir.actions.act_window',
-                # 'domain': [('state', '=', 'draft'), ('user_creador_id', '=', 1)],
+                # 'context': {'default_categoria_mineral_exp': 'Primera'},
+                'domain': [('state', '=', 'draft'), ('user_creador_id', '=', user_id)],
                 'views': [[self.env.ref('expediente.list').id, "tree"], [self.env.ref('expediente.form').id, "form"]],
             }
         else:
-            raise ValidationError(('No se encontro el departamento del usuario'))
+            raise ValidationError(('No se encontro el departamento del usuario. '
+                                   'Debe asociar la persona ingresada en el modulo recursos humanos con su '
+                                   'correspondiente usuario SIGETRAMI'))
         return action
 
     @api.multi
@@ -204,8 +258,8 @@ class expediente(models.Model):
                 'view_mode': 'tree, form',
                 'res_model': 'expediente.expediente',
                 'type': 'ir.actions.act_window',
-                # 'domain': [('recibido', '=', False),
-                #            ('oficina_destino', '=', depart_user_id)],
+                'domain': [('recibido', '=', False),
+                           ('oficina_destino', '=', depart_user_id)],
                 'views': [[self.env.ref('expediente.list_recibir').id, "tree"], [self.env.ref('expediente.form').id, "form"]],
             }
         else:
@@ -227,7 +281,7 @@ class expediente(models.Model):
         else:
             raise ValidationError(('No se encontro el departamento del usuario'))
         return action
-    """
+
     #########################################
     ######FIN LLAMADOS A VISTAS DE EXPEDIENTES PERSONALIZADAS#########
 
@@ -283,6 +337,7 @@ class expediente(models.Model):
         return action
 
     def mi_oficina_view(self):
+        print ("BUSCANDO MI OFICINA ################################")
         user_id = self.env.user.id
         depart_user_id = self.userdepart(user_id)
         if depart_user_id > 0:
@@ -334,6 +389,8 @@ class expediente(models.Model):
 
     def enviar(self):
         active_id = self.env.context.get('id_activo')
+        if not active_id:
+            active_id = self.id
         #self = self.with_context(get_sizes=True)
         print (("ENVIANDO .... " + str(active_id)))
         #print(("CONTEXTO .... " + str(self.env.context)))
@@ -396,14 +453,18 @@ class expediente(models.Model):
 
     def enviar_conf(self):
         active_id = self.env.context.get('id_activo')
-        #print (("EL ID ACTIVO ESSSS:  .... " + str(active_id)))
+        expte_obj = self.browse([active_id])
+        print (("EN LA CLASE BASE DE EXPEDIENTE --- EL ID ACTIVO ESSSS:  .... " + str(active_id)))
         fojas_new = self.env.context.get('fojas_new')
-        destino_new = self.env.context.get('oficina_destino_new')
+        if expte_obj.oficina_destino != False:
+            destino_new = expte_obj.oficina_destino.id
+        else:
+            destino_new = self.env.context.get('oficina_destino_new')
         observaciones_new = self.env.context.get('observaciones_new')
         #La siguiente variable tiene dos valores form y view
         retorno = 'view'
         retorno = self.env.context.get('vista_padre')
-        #print(("MOSTRANDO CONTEXT:  .... " + str(self.env.context)))
+        print(("MOSTRANDO CONTEXT EN LA CLASE BASE DE EXPEDIENTE:  .... " + str(self.env.context)))
         #print(("VALOR DE RETORNO:  .... " + str(retorno)))
         #VALIDACION
         if not observaciones_new:
@@ -416,8 +477,6 @@ class expediente(models.Model):
         # self.validacion("destino", destino_new)
         #FIN VALIDACION
         user_id = self.env.user.id
-        expte_obj = self.browse([active_id])
-        #print (("OBJETO.... " + str(expte_obj.name)))
         depart_id = self.userdepart(user_id)
         if depart_id:
             pase_obj = self.env['pase.pase']
@@ -563,6 +622,52 @@ class expediente(models.Model):
         else:
             raise ValidationError(('El empleado no tiene oficina asignada o se encuentra asignado a varias oficinas'))
         return True
+
+    def popup_mas(self):
+        print (("MAS INFORMACION DEL DOCUMENTO"))
+        # tipo_lista = self.env.context.get('tipo_historia')
+        # #pase_obj = self.env['pase.pase']
+        # #if not pase_obj:
+        #     #raise ValidationError(('Debe instalar el modulo de pases.'))
+        # #active_id = self.env.context.get('active_ids')
+        # #print (("CONTEXTO " + str(self.env.context) ))
+        active_id = self.env.context.get('id_activo')
+        print (("ENVIANDO .... " + str(active_id)))
+        user_id = self.env.user.id
+        #print (())
+        expte_obj = self.browse([active_id])
+        print (("OBJETO.... " + str(expte_obj.name)))
+        depart_id = self.userdepart(user_id)
+        if True:
+            return {
+            'name': "Información del Documento: " + expte_obj.name,
+            'view_mode': 'form',
+            'res_id': active_id, #SOLO PARA FORM
+            'res_model': 'expediente.expediente',
+            'type': 'ir.actions.act_window',
+            # 'domain': [('seguimiento_id.expediente_id', '=', active_id)],
+            #'context': {'recibido': True, 'ubicacion_actual': depart_id},
+            'views': [[self.env.ref('expediente.form_popup_mas').id, "form"]],
+            'target': 'new',
+            'tag': 'reload',
+            }
+        if depart_id:
+            return {
+            'name': "Movimientos del Documento " + expte_obj.name,
+            'view_mode': 'tree',
+            #'res_id': active_id, #SOLO PARA FORM
+            'res_model': 'pase.pase',
+            'type': 'ir.actions.act_window',
+            'domain': [('expediente_id', '=', active_id)],
+            #'context': {'recibido': True, 'ubicacion_actual': depart_id},
+            'views': [[self.env.ref('pase.list').id, "tree"]],
+            'target': 'new',
+            'tag': 'reload',
+            }
+        else:
+            raise ValidationError(('El empleado no tiene oficina asignada o se encuentra asignado a varias oficinas'))
+        return True
+
 
     class estado_legal(models.Model):
         _name = 'estado_legal.estado_legal'
