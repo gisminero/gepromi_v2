@@ -11,6 +11,7 @@
             <field name="departament_id"/>
           <field name="name"/>
           <field name="descrip"/>
+          <field name="proced_id"/>
         </tree>
       </field>
     </record>
@@ -28,6 +29,7 @@
           <field name="name"/>
           <field name="codigo"/>
           <field name="active"/>
+          <field name="proced_id"/>
           <field name="departament_id"/>
           <field name="tipo"/>
           <field name="subproc" attrs="{'readonly':[('tipo','!=', '6')]}"/>

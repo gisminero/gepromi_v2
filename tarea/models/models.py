@@ -20,6 +20,7 @@ class tarea(models.Model):
     descrip = fields.Char('Descripcion', required=False)
     active = fields.Boolean('Activo', default=True)
     departament_id = fields.Many2one('hr.department', 'Oficina', copy=False, required=True)
+    proced_id = fields.Many2one('procedimiento.procedimiento', 'Tramite', copy=False, required=True)
     tipo = fields.Selection([
         ('1', 'Inicial'),
         ('2', 'Proceso'),
@@ -30,7 +31,7 @@ class tarea(models.Model):
                 ], 'Tipo de Tarea', index=True, readonly=False, default='2', required=True)
     subproc =fields.Many2one('procedimiento.procedimiento', 'Subproceso', required=False, domain=[('iniciado', '=', 2)])
     plazos = fields.Many2many('tarea.plazo', string='Plazos de Tiempo', help="Only for tax excluded from price")
-    estado_legal = fields.Many2one('estado_legal.estado_legal', 'Estado Legal', copy=False, required=False)
+    estado_legal = fields.Many2one('estado_legal.estado_legal', 'Estado Legal', copy=False, required=True)
     fueraflujo = fields.Boolean('Suspende Plazo',required=False, compute='_get_value')
 
     def name_get(self):

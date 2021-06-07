@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Tareas",
+    'name': "SIGETRAMI Tarea",
     'summary': """
         Describe cada tarea de del flujo de tareas,
         perteneciente a los Procedimientos Mineros.
