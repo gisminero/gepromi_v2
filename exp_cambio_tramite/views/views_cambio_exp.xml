@@ -1,0 +1,97 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="exp_cambio_tramite.cambio_tramite_historia">
+      <field name="name">Cambio de Tramite</field>
+      <field name="model">exp_historia_tramite</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tramite_id"/>
+          <field name="solicitante"/>
+          <field name="solicitante_cuit"/>
+          <field name="solicitantes"/>
+          <field name="create_date" string="Comienzo" />
+          <field name="create_uid" string="Usuario"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="exp_cambio_tramite.cambio_tramite_historia_form">
+      <field name="name">Cambio de Tramite</field>
+      <field name="model">exp_historia_tramite</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="tramite_id" readonly="1" />
+          <field name="solicitante" readonly="1"/>
+          <field name="solicitante_cuit" readonly="1"/>
+                <field name="solicitantes" nolabel="1" colspan="2" readonly="1">
+                    <tree string="Solicitantes" editable="bottom">
+                            <field name="solicitante"/>
+                            <field name="solicitante_cuit"/>
+			        </tree>
+		        </field>
+
+          <field name="create_date" string="Comienzo" readonly="1" />
+          <field name="create_uid" string="Usuario" readonly="1"/>
+<!-- <footer>-->
+            <newline/>
+            <button name="historia_tramites" type="object" string="Volver a Lista" class="oe_highlight"/>
+            <button string="Cerrar" class="btn-default" special="cancel"/>
+<!-- </footer>-->
+        </form>
+      </field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="exp_cambio_tramite.cambio_tramite_exp_form_popup">
+      <field name="name">Cambio de Tramite</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+      <form string="Cambio de Tramite">
+        <header>
+        </header>
+        <separator string="Ingrese la nueva información del Expediente" colspan="4"/>
+        La información anterior quedará registrada en la historia de la propiedad.
+        <group >
+                <field name="procedimiento_id" domain="[('id', 'in', context.get('dominio', False))]"
+                string="Nuevo Trámite"/>
+                            <field name="solicitante"/>
+                            <field name="solicitante_cuit"/>
+                 <newline/>
+                <field name="solicitantes" nolabel="1" colspan="2" >
+			                    <tree string="Solicitantes" editable="bottom">
+                            <field name="solicitante"/>
+                            <field name="solicitante_cuit"/>
+			                     </tree>
+		           </field>
+<!--                <field name="exp_id" invisible="1"/>-->
+         </group>
+
+        <footer>
+              <button name="no_cambiar" type="object" string="No Cambiar" class="btn-default"
+              confirm="¿Confirma que NO desea realizar el cambio de trámite?"
+              />
+
+              <button name="cambio_tramite_en_expte" type="object" string="Cambiar trámite" class="oe_highlight"
+              confirm="¿Confirma el cambio de trámite del actual expediente?" />
+
+              <button string="Cancelar" class="btn-default" special="cancel"/>
+<!--              <button string="Cancelar" class="btn-default" name="cancel_return_mi_oficina" type="object" />-->
+          </footer>
+      </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="exp_cambio_tramite.cambio_action_window">
+      <field name="name">Cambio de Tramite</field>
+      <field name="res_model">exp_historia_tramite</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Cambio de Tramite" id="exp_cambio_tramite.menu_cambio_list" parent="gepromi.config"
+              action="exp_cambio_tramite.config_action_window"/>
+
+  </data>
+</odoo>

@@ -1,0 +1,55 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="exp_cambio_tramite.config_list">
+      <field name="name">Cambio de Tramite Configurados</field>
+      <field name="model">conf_cambio_tramite</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="tramite_inicial_id"/>
+          <field name="estado_legal_id"/>
+          <field name="active"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="exp_cambio_tramite.config_form">
+      <field name="name">Configuracion de Cambio de Tramite</field>
+      <field name="model">conf_cambio_tramite</field>
+      <field name="arch" type="xml">
+      <form string="Cambio de Tramite">
+        <header>
+        </header>
+        <group>
+        <separator string="Configuración de Cambio de Trámite" colspan="4"/>
+        <!--<spam>En esta pantalla se configura la combinación de trámite y estado, en la cual el sistema debe permitir cambio de trámite en un expediente.<spam/> -->
+        </group>
+        <group>
+                <field name="name"/>
+                <field name="tramite_inicial_id"/>
+                <field name="estado_legal_id"/>
+                <field name="active"/>
+         </group>
+        <group>
+       <!--  A continuación debe ingresar cuales son los trámites que el sistema debe permitir para la combinación seleccionada anteriormente. -->
+
+          <field name="tramites_posibles_ids" nolabel="1" colspan="1"  >
+            <tree string="Tramites" editable="bottom">
+              <field name="tramite_id" />
+            </tree>
+          </field>
+        </group>
+      </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="exp_cambio_tramite.config_action_window">
+      <field name="name">Cambio de Tramite</field>
+      <field name="res_model">conf_cambio_tramite</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Cambio de Tramite" id="exp_cambio_tramite.menu_cambio_list" parent="gepromi.config"
+              action="exp_cambio_tramite.config_action_window"/>
+  </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="exp_cambio_tramite.autorizacion" >
+      <field name="name">GeProMi.Cambio de Tramite</field>
+      <field name="description">Controla si el usuario tiene permisos para realizar cambio de trámite.</field>
+      <field name="sequence">11</field>
+    </record>
+
+   <record id="exp_cambio_tramite_autorizado_no" model="res.groups">
+     <field name="name">No autorizado</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="exp_cambio_tramite.autorizacion"/>
+    </record>
+
+    <record id="exp_cambio_tramite_autorizado" model="res.groups">
+      <field name="name">Autorizado</field>
+      <field name="implied_ids" eval="[(4, ref('exp_cambio_tramite.exp_cambio_tramite_autorizado_no'))]"/>
+   <field name="category_id" ref="exp_cambio_tramite.autorizacion"/>
+    </record>
+
+</odoo>
+
+
