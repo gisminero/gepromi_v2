@@ -8,6 +8,7 @@
           <field name="seguimiento_id"/>
           <field name="tarea"/>
           <field name="tarea_inicio"/>
+          <field name="tarea_fin" />
           <field name="observ_segui"/>
           <field name="subproc"/>
         </tree>
@@ -40,6 +41,7 @@
                 <tree>
                   <field name="tarea" />
                   <field name="tarea_inicio" />
+                  <field name="tarea_fin" />
                   <field name="observ_segui" />
                   <field name="subproc" />
                 </tree>

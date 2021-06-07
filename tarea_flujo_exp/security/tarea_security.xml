@@ -7,14 +7,6 @@
       <field name="sequence">6</field>
     </record>
 
- <!--
-    <record id="access_group_expte_flujo_no" model="res.groups">
-     <field name="name">No</field>
-     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-     <field name="users" eval="[(4, ref('base.user_root'))]"/>
-     <field name="category_id" ref="tarea_flujo_exp.module_management_flujo"/>
-    </record>
-  -->
    <record id="access_group_expte_flujo_si" model="res.groups">
      <field name="name">Ingresar_en_flujo</field>
      <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
@@ -22,16 +14,7 @@
      <field name="category_id" ref="tarea_flujo_exp.module_management_flujo"/>
     </record>
 
-      <!--
-      <record id="access_group_expte_flujo_super" model="res.groups">
-     <field name="name">Si Super</field>
-     <field name="implied_ids" eval="[(4, ref('expediente.access_group_expte_flujo'))]"/>
-     <field name="users" eval="[(4, ref('base.user_root'))]"/>
-     <field name="category_id" ref="expediente.module_management_flujo2"/>
-    </record>
-    -->
-
-    <record model="ir.module.category" id="tarea_flujo_exp.seguimiento" >
+     <record model="ir.module.category" id="tarea_flujo_exp.seguimiento" >
       <field name="name">GeProMi.Seguimiento Tareas</field>
       <field name="description">Niveles de acceso a Seguimiento por tareas.</field>
       <field name="sequence">7</field>

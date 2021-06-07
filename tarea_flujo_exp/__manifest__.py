@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Seguimiento de Flujo de Tareas",
+    'name': "SIGETRAMI Seguimiento de Flujo de Tareas",
 
     'summary': """
         Guiar el expediente a traves del flujo de tareas.
@@ -23,7 +23,7 @@
     'version': '0.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'gepromi', 'tarea_flujo', 'expediente'],
+    'depends': ['base', 'gepromi', 'tarea_flujo', 'expediente', 'notificaciones', 'exp_cambio_tramite'],#, 'apiclient'
     # always loaded
     'data': [
         'views/views_over.xml',
@@ -37,5 +37,5 @@
         #'demo/demo.xml',
     ],
     'application': True,
-    'auto_install': False,
+    'auto_install': True,
 }
