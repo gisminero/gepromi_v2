@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="exp_cambio_tramite.expediente_corregir">
+      <field name="name">Corregir Expediente</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+        <tree create="false" edit="false" import="false">
+            <field name="id" invisible="1"/>
+            <field name="state" invisible="1"/>
+          <field name="name"/>
+          <field name="procedimiento_id"/>
+          <field name="solicitante"/>
+            <field name="solicitante_cuit"/>
+          <field name="ubicacion_actual"  />
+          <field name="tarea_actual"/>
+            <field name="recibido"/>
+    <button string="Envio Directo" class="btn-default" name="envio_directo" type="object" attrs="{'invisible':[('recibido','=', False)]}" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="exp_cambio_tramite.expediente_corregir_form">
+      <field name="name">Correccion de Flujo</field>
+      <field name="model">expediente.expediente</field>
+      <field name="arch" type="xml">
+      <form string="Correccion de Flujo" create="false"  editable="top">
+
+        <header>
+        </header>
+                <separator string=" Seleccione la próxima oficina y tarea." attrs="{'invisible':[('en_flujo','!=', True)]}" />
+                    La tarea actual se encuentra terminada.
+
+            <group>
+                <field name="procedimiento_id" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                <field name="name" attrs="{'readonly':[('state','!=', 'draft')]}"/>
+                <field name="en_flujo" invisible="0" string="En Flujo" />
+                <field name="ubicacion_actual" invisible="0" attrs="{'readonly': True}" />
+                <field name="tarea_actual" attrs="{'readonly':[('en_flujo','!=', False)]}" on_change="onchange_define_pase(tarea_actual)"/>
+                <!--domain="[('id','in', actual_tarea_list)]" -->
+                <field name="oficina_destino"   />
+                <field name="tarea_proxima"
+                 attrs="{'readonly':[('en_flujo','!=', True)]}" domain="[('departament_id','=', oficina_destino), ('proced_id','=', procedimiento_id)]"/>
+
+
+                <!--  domain="['|',('id','in', proxima_tarea_list),('id','=', False)]"
+                  on_change="onchange_define_pase(tarea_proxima_cambio)"-->
+
+
+                <field name="folios" invisible="0"  />
+                <field name="observ_pase" invisible="0"/>
+            </group>
+          <field name="state" invisible="1"/>
+          <field name="id" invisible="1" />
+          <footer>
+              <button name="proxima_tarea_enviar" type="object" string="Enviar"
+              class="oe_highlight"
+                      context="{'tarea_actual_new': tarea_actual,
+                                'tarea_proxima_cont': tarea_proxima,
+                                'oficina_destino_new': oficina_destino,
+                                'fojas_new': folios,
+                                'observaciones_new': observ_pase,
+                                'id_activo': id,
+                                'en_flujo_new': en_flujo,
+                                'vista_padre': 'form' } "
+
+              confirm="Por favor controlar la cantidad de folios. Cancele este mensaje para corregir." />
+                <button string="Cancelar" class="btn-default" special="cancel"/>
+          </footer>
+
+
+      </form>
+      </field>
+    </record>
+
+
+</odoo>

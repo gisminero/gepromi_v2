@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="exp_envios_admin.autorizacion" >
+      <field name="name">GeProMi.Correccion Envios</field>
+      <field name="description">Controla si el usuario flujos.</field>
+      <field name="sequence">11</field>
+    </record>
+
+   <record id="exp_envios_admin_base" model="res.groups">
+     <field name="name">Basico</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="exp_envios_admin.autorizacion"/>
+    </record>
+
+<!--    <record id="exp_envios_admin_medio" model="res.groups">-->
+<!--      <field name="name">Medio</field>-->
+<!--      <field name="implied_ids" eval="[(4, ref('exp_envios_admin.exp_envios_admin_base'))]"/>-->
+<!--   <field name="category_id" ref="exp_envios_admin.autorizacion"/>-->
+<!--    </record>-->
+<!--    Linea asociada en .csv-->
+<!--    access_envios_admin_medio,exp_envios_admin.envios_admin_medio,model_exp_envios_admin,exp_envios_admin.exp_envios_admin_medio,1,1,1,1-->
+
+    <record id="exp_envios_admin_alto" model="res.groups">
+      <field name="name">Alto</field>
+      <field name="implied_ids" eval="[(4, ref('exp_envios_admin.exp_envios_admin_base'))]"/>
+   <field name="category_id" ref="exp_envios_admin.autorizacion"/>
+    </record>
+
+</odoo>
+
+

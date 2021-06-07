@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_envios_admin_base,exp_envios_admin.envios_admin_base,model_exp_envios_admin,exp_envios_admin.exp_envios_admin_base,1,1,1,1
+access_envios_admin_alto,exp_envios_admin.envios_admin_alto,model_exp_envios_admin,exp_envios_admin.exp_envios_admin_alto,1,1,1,1
+access_seguimiento_linea,tarea_flujo_exp.seguimiento_linea,tarea_flujo_exp.model_seguimiento_linea,exp_envios_admin.exp_envios_admin_base,1,1,1,1

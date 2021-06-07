@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+       <record model="ir.ui.view" id="exp_cambio_tramite.expediente_cambio">
+      <field name="name">Cambio de Taamite</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form"/>
+      <field name="arch" type="xml">
+<!--          <xpath expr="//button[@name='popup_mas']"  position="after">-->
+<!--                    <button name="historia_tramites" type="object" string="Historia de Tramites"-->
+<!--                            context="{'id_activo': id, 'tipo_historia': 'tramite'}" class="btn-default"  attrs="{'invisible':[('state', '=', 'draft')]}"-->
+<!--                        />-->
+<!--            </xpath>-->
+             <xpath expr="//button[@name='popup_mas']"  position="after">
+                    <button name="seleccionar_popup_cambio_tramite" type="object" string="Cambio de Trámite" context="{'id_activo': id}" style="background-color: #00cc00;"
+                        attrs="{'invisible':[('cambio_de_tramite', '!=', True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='ubicacion_actual']" position="after">
+                    <field name="cambio_de_tramite" />
+               <!--     <field name="historia_tramite" />  -->
+            </xpath>
+
+        </field>
+     </record>
+
+                <!-- Over Movimientos de Tareas -->
+    <record model="ir.ui.view" id="exp_cambio_tramite.expediente_movimientos_tareas">
+      <field name="name">Movimientos de Tareas</field>
+      <field name="model">expediente.expediente</field>
+      <field name="inherit_id" ref="expediente.form_popup_mas"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='movimientos']"  position="after">
+<!--            <group colspan="4">-->
+            <button name="historia_tramites" type="object" string="Historia de Tramites"
+                    context="{'id_activo': id, 'tipo_historia': 'tramite'}" class="btn-default"  />
+<!--            </group>-->
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+
+ </odoo>

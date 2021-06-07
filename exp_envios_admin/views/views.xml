@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="exp_envios_admin.envios_no_rec_list">
+      <field name="name">Lista de Envios No Recibidos</field>
+      <field name="model">pase.pase</field>
+      <field name="arch" type="xml">
+          <tree create="false" >
+                <field name="name"/>
+                 <!--    <field name="expediente_id"/>  -->
+                <field name="depart_origen_id"/>
+                <field name="depart_destino_id"/>
+                <field name="folios"/>
+                <field name="fecha_hora_envio"/>
+                <field name="user_recep_id"/>
+                <field name="fecha_hora_recep"/>
+                <field name="observ_pase" />
+        </tree>
+<!--        <tree colors="green: alertas_enviados==False" >-->
+<!--          <field name="name"/>-->
+<!--        </tree>-->
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="exp_envios_admin.envios_no_rec_form">
+      <field name="name">Pase</field>
+      <field name="model">pase.pase</field>
+      <field name="create">false</field>
+      <field name="arch" type="xml">
+      <form string="Pase apto para eliminar con seguridad" duplicate="false" edit="false" create="false" delete="false" >
+      <!--  delete="false"   -->
+        <header>
+
+        </header>
+          <sheet>
+            <separator string="Pase no recibido, apto para eliminar" colspan="4"/>
+             <group>
+                 <field name="name"/>
+                 <!--    <field name="expediente_id"/>  -->
+                <field name="depart_origen_id"/>
+                <field name="depart_destino_id"/>
+                <field name="folios"/>
+                <field name="fecha_hora_envio"/>
+                <field name="user_recep_id"/>
+                <field name="fecha_hora_recep"/>
+                <field name="observ_pase" />
+
+            </group>
+ <footer>
+
+            <button name="eliminar" type="object" string="Eliminar Pase y Tarea Asociada" class="oe_highlight"
+            confirm="El ultimo pase no recibido será eliminado. Se asignará como tarea del expediente la anterior al envío." />
+            <button name="enviados_sin_recepcion_view" type="object" string="Cerrar" class="btn-default"/>
+
+ </footer>
+       </sheet>
+      </form>
+      </field>
+    </record>
+
+ <record model="ir.actions.server" id="exp_envios_admin.mi_oficina_enviados_sr">
+    <field name="name">Enviados S/R</field>
+    <field name="model_id" ref="model_pase_pase"/>
+    <field name="state">code</field>
+    <field name="code">action = env.get('pase.pase').enviados_sin_recepcion_view()</field>
+</record>
+
+ <record model="ir.actions.server" id="exp_envios_admin.mi_oficina_reclamados">
+    <field name="name">Envios Reclamados</field>
+    <field name="model_id" ref="model_pase_pase"/>
+    <field name="state">code</field>
+    <field name="code">action = env.get('pase.pase').enviados_reclamados_view()</field>
+</record>
+ <record model="ir.actions.server" id="exp_envios_admin.correccion_flujo">
+    <field name="name">Correccion de Flujo</field>
+    <field name="model_id" ref="model_pase_pase"/>
+    <field name="state">code</field>
+    <field name="code">action = env.get('pase.pase').correccion_flujo_view()</field>
+
+</record>
+
+<!--  <menuitem name="Administración" id="gepromi.administracion" parent="gepromi.menu_root"/>-->
+
+    <menuitem name="Envíos Sin Recepcion" id="exp_envios_admin.envios_no_recib_list" parent="gepromi.administracion"
+        action="exp_envios_admin.mi_oficina_enviados_sr" groups="exp_envios_admin.exp_envios_admin_base"/>
+
+<!--     <menuitem name="Envíos Reclamados" id="exp_envios_admin.envios_recib_list" parent="gepromi.administracion"-->
+<!--        action="exp_envios_admin.mi_oficina_reclamados" groups="exp_envios_admin.exp_envios_admin_medio"/>-->
+
+     <menuitem name="Correccion de Flujo" id="exp_envios_admin.envios_correccion" parent="gepromi.administracion"
+        action="exp_envios_admin.correccion_flujo"  groups="exp_envios_admin.exp_envios_admin_alto" />
+<!--     -->
+
+<!--    <menuitem name="Mis Alertas" id="notificaciones.alerta_server_list" parent="gepromi.notifica"-->
+<!--             action="notificaciones.alerta_mis_alertas"/>-->
+
+      <!--  <menuitem name="Mis Alertas 21" id="notificaciones.alerta_action_pop_up" parent="gepromi.notifica"
+             action="notificaciones.alerta_action_window"/>
+            -->
+</odoo>

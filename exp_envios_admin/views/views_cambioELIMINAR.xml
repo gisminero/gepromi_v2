@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="exp_cambio_tramite.cambio_tramite_accion">
+      <field name="name">Cambio de Tramite</field>
+      <field name="model">exp_historia_tramite</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tramite_id"/>
+<!--          <field name="nombre_pedimento"/> -->
+          <field name="nombre_titular"/>
+          <field name="cuit_titular"/>
+            <field name="exp_id"/>
+          <field name="create_date" string="Comienzo" />
+          <field name="create_uid" string="Usuario"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="exp_cambio_tramite.cambio_tramite_form_popup">
+      <field name="name">Cambio de Tramite</field>
+      <field name="model">exp_historia_tramite</field>
+      <field name="arch" type="xml">
+      <form string="Cambio de Tramite">
+        <header>
+
+        </header>
+        <separator string="Ingrese la nueva información del Expediente" colspan="4"/>
+        La información anterior quedará registrada en la historia de la propiedad.
+        <group >
+                <field name="tramite_id" domain="[('id', 'in', context.get('dominio', False))]"
+                string="Nuevo Trámite"/>
+<!--                <field name="nombre_pedimento"/>-->
+                <field name="nombre_titular"/>
+                <field name="cuit_titular"/>
+                <field name="exp_id" invisible="1"/>
+         </group>
+
+        <footer>
+              <button name="write" type="object" string="Cambiar trámite" class="oe_highlight"
+              confirm="¿Confirma el cambio de trámite del actual expediente?" />
+              <button string="Cancelar" class="btn-default" name="cancel_return_mi_oficina" type="object" />
+          </footer>
+      </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="exp_cambio_tramite.cambio_action_window">
+      <field name="name">Cambio de Tramite</field>
+      <field name="res_model">exp_historia_tramite</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem name="Cambio de Tramite" id="exp_cambio_tramite.menu_cambio_list" parent="gepromi.config"
+              action="exp_cambio_tramite.config_action_window"/>
+
+  </data>
+</odoo>
