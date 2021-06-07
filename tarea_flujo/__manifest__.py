@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Flujo de Tareas 2",
+    'name': "SIGETRAMI Flujo de Tareas 2",
     'summary': """
         Incorpora utilidades para la creacion de un flujo de
         de tareas para cada procedimiento minero.""",

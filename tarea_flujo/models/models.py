@@ -4,7 +4,8 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError, ValidationError
 from odoo.exceptions import Warning
 from unidecode import unidecode
-import csv
+import csv, os
+
 import base64
 
 class flujolinea(models.Model):
@@ -116,24 +117,28 @@ class flujo(models.Model):
 
     def crear_archivo(self,dic):
 #        newfile= open('/opt/odoo/server/addonsgis/tarea_flujo/models/filedatos.csv','wb')
-        with open('/opt/odoo/server/addonsgis/tarea_flujo/models/filedatos.csv','wb') as newfile:
+        foldertemp = os.path.dirname(os.path.abspath(__file__)) + '/filedatos.csv'
+        print((" EL PATH ACTUAL ES : " + foldertemp))
+        with open(foldertemp,'w') as newfile:
             fieldnames=[['CODIGO'],['ORIGEN'],['CODIGO'],['DESTINO'],['CONDICIONES']]
-            archivo=csv.writer(newfile)
+            archivo = csv.writer(newfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             archivo.writerow(fieldnames)
             for row in dic:
-                archivo.writerow(unicode (row))
+                archivo.writerow(unicode(row))
         print("EL ARCHIVO FUE CREADO")
         descarga=self.generate_file()#llama a la función que descargará el archivo
 
 
     @api.one
     def generate_file(self,):
-        full_path = '/opt/odoo/server/addonsgis/tarea_flujo/models/filedatos.csv'
+        # full_path = '/opt/odoo/server/addonsgis/tarea_flujo/models/filedatos.csv'
+        full_path = os.path.dirname(os.path.abspath(__file__)) + '/filedatos.csv'
+        print((" EL PATH ACTUAL ES : " + full_path))
         f = open(full_path, 'rb')
         content=f.read().encode('base64')
         return self.write({
             'csvfilename':'Descargar.csv',
-            'filebinary':unicode(content)
+            'filebinary': unicode(content)
             })
 
 
