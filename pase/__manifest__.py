@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi - Pases de Expedientes",
+    'name': "SIGETRAMI - Pases de Expedientes",
 
     'summary': """
         Gestionar los pases de expedientes entre oficinas""",

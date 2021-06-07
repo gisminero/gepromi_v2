@@ -100,3 +100,20 @@ class pase(models.Model):
         else:
             print(("NO TRAE OBJETO PASE"))
         return False
+
+    def userdepart(self, user_id):
+        num_empl = self.env['hr.employee'].search_count([('user_id', '=', user_id)])
+        if num_empl < 1:
+            print (("No se encuentra el empleado asociado al usuario: " + str(user_id)))
+            return False
+        elif num_empl > 1:
+            print (("Hay mas de un emplado asociado al usuario: " + str(user_id)))
+            return False
+        else:
+            empl_obj = self.env['hr.employee'].search([('user_id', '=', user_id)])
+            if empl_obj.department_id.id:
+                # print (("RETORNANDO EL DEPARTAMENTO: " + str(empl_obj.department_id.id)))
+                return empl_obj.department_id.id
+            else:
+                print (("EL EMPLEADO NO TIENE OFICINA ASIGNADA"))
+                return False
