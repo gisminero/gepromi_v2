@@ -122,8 +122,8 @@ class expediente(models.Model):
         ('archive', 'Archivo')], string='Estado', required=True, default="draft",
         help="Determina el estado del expediente")
     procedimiento_id = fields.Many2one('procedimiento.procedimiento','Tramite', required=True)
-    solicitante = fields.Char('Solicitante', required=False)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
-    solicitante_cuit = fields.Char('CUIT/CUIL/DNI', required=False)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
+    solicitante = fields.Char('Solicitante', required=False, readonly=True)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
+    solicitante_cuit = fields.Char('CUIT/CUIL/DNI', required=False, readonly=True)#30/05/21 Este campo se conserva por compatibilidad con los datos de la prov de Neuquén
     solicitantes = fields.One2many('exp_solicitantes', 'exp_id', string='Solicitantes', required=False)
     folios = fields.Integer('Folios', help='', default=1)
     estado_legal_actual = fields.Char('Estado Legal Actual', required=False, readonly=True)
@@ -393,11 +393,7 @@ class expediente(models.Model):
             active_id = self.id
         #self = self.with_context(get_sizes=True)
         print (("ENVIANDO .... " + str(active_id)))
-        #print(("CONTEXTO .... " + str(self.env.context)))
-        #self.env.context = False
-        #print(("CONTEXTO DESPUES DE BORRAR.... " + str(self.env.context)))
         user_id = self.env.user.id
-        #print (())
         expte_obj = self.browse([active_id])
         #print (("OBJETO.... " + str(expte_obj.name)))
         depart_id = self.userdepart(user_id)
@@ -477,7 +473,10 @@ class expediente(models.Model):
         # self.validacion("destino", destino_new)
         #FIN VALIDACION
         user_id = self.env.user.id
-        depart_id = self.userdepart(user_id)
+        if self.ubicacion_actual !=False:
+            depart_id = self.ubicacion_actual.id
+        else:
+            depart_id = self.userdepart(user_id)
         if depart_id:
             pase_obj = self.env['pase.pase']
             pase_obj.create({'user_origen_id': user_id,
