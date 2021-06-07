@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "GeProMi Mineral",
+    'name': "SIGETRAMI Mineral",
 
     'summary': """
         Permite administrar los minerales con los cuales trabajara el sistema""",
@@ -26,6 +26,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'data/data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
