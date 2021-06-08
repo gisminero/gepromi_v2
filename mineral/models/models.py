@@ -2,6 +2,17 @@
 
 from odoo import models, fields, api
 
+# class mineral_lugar(models.Model):
+#     _name = 'mineral_lugar'
+#     _order = 'categoria asc'
+#
+#     name = fields.Char('Nombre', required=True)
+#     categoria = fields.Selection([
+#         ('Primera', 'Primera'),
+#         ('Segunda', 'Segunda'),
+#         ('Tercera', 'Tercera'),], required=True,
+#         help="Categoria del mineral")
+#     active = fields.Boolean('Activo', default=True)
 
 class mineral(models.Model):
     _name = 'mineral'
